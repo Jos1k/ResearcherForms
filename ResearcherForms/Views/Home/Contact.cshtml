@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "Contact";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>/>
+<h2><strong>Example</strong></h2>
+<form action="">
+    <textarea name="formBuilder" id="formBuilder" cols="30" rows="10"></textarea>
+</form>
+<script>
+    $(document).ready(function ($) {
+        'use strict';
+        $('textarea').formBuilder();
+    });
+</script>
