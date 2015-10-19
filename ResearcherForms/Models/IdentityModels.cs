@@ -25,6 +25,13 @@ namespace ResearcherForms.Models
         {
         }
 
+		public DbSet<Field> Fields { get; set; }
+		public DbSet<FielData> FieldsData { get; set; }
+		public DbSet<UserFormFieldData> UserFormsFieldData { get; set; }
+		public DbSet<Option> Options { get; set; }
+		public DbSet<ResearchForm> ResearchForms { get; set; }
+		public DbSet<Course> Courses { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
