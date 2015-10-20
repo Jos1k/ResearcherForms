@@ -13,8 +13,9 @@ namespace ResearcherForms.Models {
 		public long Id { get; set; }
 		public string Name { get; set; }
 		public long ResearchCourseId { get; set; }
-		[ForeignKey( "ResearchCourseId" )]
+		//[ForeignKey( "ResearchCourseId" )]
 		public virtual Course ResearchCourse { get; set; }
 		public virtual ICollection<Field> Fields { get; set; }
+		public virtual ICollection<UserFormFieldData> UserFormsFieldData { get; set; }
 	}
 }

@@ -98,6 +98,7 @@ E:\Development\ResearcherFormsGit\ResearcherForms\bin\Owin.dll
 E:\Development\ResearcherFormsGit\ResearcherForms\bin\System.Web.Helpers.dll
 E:\Development\ResearcherFormsGit\ResearcherForms\bin\System.Web.Mvc.dll
 E:\Development\ResearcherFormsGit\ResearcherForms\bin\System.Web.Optimization.dll
+E:\Development\ResearcherFormsGit\ResearcherForms\bin\System.Web.Providers.dll
 E:\Development\ResearcherFormsGit\ResearcherForms\bin\System.Web.Razor.dll
 E:\Development\ResearcherFormsGit\ResearcherForms\bin\System.Web.WebPages.Deployment.dll
 E:\Development\ResearcherFormsGit\ResearcherForms\bin\System.Web.WebPages.dll
@@ -108,6 +109,7 @@ E:\Development\ResearcherFormsGit\ResearcherForms\bin\Microsoft.AI.ServerTelemet
 E:\Development\ResearcherFormsGit\ResearcherForms\bin\Microsoft.AI.Web.xml
 E:\Development\ResearcherFormsGit\ResearcherForms\bin\Microsoft.AI.WindowsServer.xml
 E:\Development\ResearcherFormsGit\ResearcherForms\bin\Microsoft.ApplicationInsights.xml
+E:\Development\ResearcherFormsGit\ResearcherForms\bin\System.Web.Providers.xml
 E:\Development\ResearcherFormsGit\ResearcherForms\bin\System.Web.Helpers.xml
 E:\Development\ResearcherFormsGit\ResearcherForms\bin\System.Web.Mvc.xml
 E:\Development\ResearcherFormsGit\ResearcherForms\bin\System.Web.Optimization.xml
@@ -131,6 +133,5 @@ E:\Development\ResearcherFormsGit\ResearcherForms\bin\Microsoft.Owin.Security.OA
 E:\Development\ResearcherFormsGit\ResearcherForms\bin\Microsoft.Owin.Security.Google.xml
 E:\Development\ResearcherFormsGit\ResearcherForms\bin\Microsoft.Owin.Security.Twitter.xml
 E:\Development\ResearcherFormsGit\ResearcherForms\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-E:\Development\ResearcherFormsGit\ResearcherForms\obj\Debug\ResearcherForms.csprojResolveAssemblyReference.cache
 E:\Development\ResearcherFormsGit\ResearcherForms\obj\Debug\ResearcherForms.dll
 E:\Development\ResearcherFormsGit\ResearcherForms\obj\Debug\ResearcherForms.pdb

@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using ResearcherForms.Models;
 
 namespace ResearcherForms
 {
@@ -13,6 +14,8 @@ namespace ResearcherForms
     {
         protected void Application_Start()
         {
+			Database.SetInitializer( new TestInitializer() );
+
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

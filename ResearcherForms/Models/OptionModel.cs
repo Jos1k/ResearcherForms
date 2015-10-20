@@ -13,7 +13,7 @@ namespace ResearcherForms.Models {
 		public string Name { get; set; }
 		public string Value { get; set; }
 		public long FormFieldId { get; set; }
-		[ForeignKey( "FormFieldId" )]
+		//[ForeignKey( "FormFieldId" )]
 		public virtual Field FormField { get; set; }
 	}
 }

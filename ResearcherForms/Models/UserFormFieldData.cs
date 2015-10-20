@@ -10,15 +10,13 @@ namespace ResearcherForms.Models {
 		[Key]
 		[DatabaseGeneratedAttribute( DatabaseGeneratedOption.Identity )]
 		public long Id { get; set; }
-		
 		public string UserId { get; set; }
-		[ForeignKey( "UserId" )]
+		//[ForeignKey( "UserId" )]
 		public virtual ApplicationUser User { get; set; }
-
 		public long ResearchFormId { get; set; }
-		[ForeignKey( "ResearchFormId" )]
+		//[ForeignKey( "ResearchFormId" )]
 		public virtual ResearchForm ResearchForm { get; set; }
 
-		public virtual ICollection<FielData> Options { get; set; }
+		public virtual ICollection<FieldData> Options { get; set; }
 	}
 }
