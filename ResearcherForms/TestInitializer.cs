@@ -21,11 +21,11 @@ namespace ResearcherForms {
 			{
 				new IdentityRole()
 				{
-					Name =  StaticData.RoleNames.Admin
+					Name =  StaticHelper.RoleNames.Admin
 				},
 				new IdentityRole()
 				{
-					Name =  StaticData.RoleNames.Researcher
+					Name =  StaticHelper.RoleNames.Researcher
 				}
 			};
 			roles.ForEach( role => roleManager.Create( role ) );
@@ -81,7 +81,7 @@ namespace ResearcherForms {
 						throw new InvalidOperationException( errors );
 					}
 				}
-				userManager.AddToRole( user.Id, StaticData.RoleNames.Researcher );
+				userManager.AddToRole( user.Id, StaticHelper.RoleNames.Researcher );
 			}
 
 		}

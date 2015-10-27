@@ -20,13 +20,19 @@ namespace ResearcherForms {
 
 			bundles.Add( new ScriptBundle( "~/bundles/bootstrap" ).Include(
 					  "~/Scripts/bootstrap.js",
-					  "~/Scripts/respond.js" ) );
+					  "~/Scripts/respond.js",
+					  "~/Scripts/ui-bootstrap-tpls-0.14.3.min.js" ) );
 
 			bundles.Add( new StyleBundle( "~/Content/css" ).Include(
 					  "~/Content/bootstrap.css",
 					  "~/Content/site.css",
 					  "~/Content/jquery-ui.css",
-					  "~/Content/form-builder.css") );
+					  "~/Content/form-builder.css",
+					  "~/Content/font-awesome.min.css" ) );
+
+			bundles.Add( new ScriptBundle( "~/bundles/ResearchersAngularModule" )
+			   .IncludeDirectory( "~/Scripts/angularControllers", "*.js" )
+			   .Include( "~/Scripts/researchersAppModule.js" ) );
 		}
 	}
 }
