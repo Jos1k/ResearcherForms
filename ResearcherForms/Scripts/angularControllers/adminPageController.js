@@ -1,4 +1,5 @@
 ﻿var adminPageController = function ($scope, $http, $window, $uibModal) {
+    $scope.basicUrl = '';
     $scope.courses = [];
     $scope.createCourseModalTemplate = '';
     $scope.removeCourseModalTemplate = '';
@@ -7,7 +8,7 @@
             animation: true,
             template: $scope.createCourseModalTemplate,
             controller: 'adminPageModalController',
-            //size: size,
+            size: 'createCourse',
             resolve: {
                 courseId: function () {
                     return null;
@@ -15,4 +16,7 @@
             }
         });
     };
+    $scope.gotoManageCoursePage = function (courseId) {
+        $window.location.href = $scope.basicUrl + '/Admin/GetCourseInfo/?courseId=' + courseId;
+    }
 };

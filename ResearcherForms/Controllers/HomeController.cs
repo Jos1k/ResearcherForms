@@ -30,8 +30,8 @@ namespace ResearcherForms.Controllers {
 		[Authorize( Roles = StaticHelper.RoleNames.Admin )]
 		public ActionResult IndexAdmin() {
 			ViewBag.CourseList = _adminManager.GetAllCoursesByJSON();
-			//"~/Views/Admin/Partials/CreateCourseModal.cshtml"
 			ViewBag.CreateCourseModalTemplate = StaticHelper.RenderPartialViewToString( this, "_CreateCourseModal", null );
+			ViewBag.BasicUrl = string.Format( "{0}://{1}:{2}", this.Request.Url.Scheme, this.Request.Url.Host, this.Request.Url.Port );
 			return View( "~/Views/Home/IndexAdmin.cshtml" );
 		}
 

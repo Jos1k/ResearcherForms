@@ -16,3 +16,10 @@
     white-space: normal;
 }
 
+.modal-createCourse {
+width:400px;
+}
+.modal-createCourse .modal-content .modal-content .modal-body {
+	padding-bottom:0px;
+}
+

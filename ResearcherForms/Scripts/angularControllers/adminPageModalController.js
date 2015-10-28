@@ -1,8 +1,22 @@
-﻿var adminPageModalController = function ($scope, $uibModalInstance, $window, $http, courseId) {
-
+﻿var adminPageModalController = function ($scope, $location, $uibModalInstance, $window, $http, courseId) {
+    $scope.alerts = [];
     $scope.ok = function () {
-        //some http post request for creating course here
-        $uibModalInstance.close();
+
+        $http({
+            method: 'POST',
+            url: '/Admin/CreateCourse',
+            headers: { 'Content-Type': 'application/json;' },
+            data: {
+                'name': $scope.courseName
+            }
+        }).
+        then(function (response) {
+            $window.location.href = response.data;
+        }, function (response) {
+            $scope.alerts[0] = { type: 'danger', msg: response.statusText };
+        });
+
+        //$uibModalInstance.close();
     };
 
     $scope.cancel = function () {

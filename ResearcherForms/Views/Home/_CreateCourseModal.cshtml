@@ -3,6 +3,7 @@
         <h5 class="modal-title"><b>Create Course</b></h5>
     </div>
     <div class="modal-body">
+        <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}">{{alert.msg}}</uib-alert>
         <div class="form-group">
             <label for="courseName">Course Name:</label>
             <input type="text" class="form-control" id="courseName" ng-model="courseName" required>

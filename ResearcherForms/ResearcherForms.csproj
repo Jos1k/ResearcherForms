@@ -211,6 +211,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="BusinessLogic\AdminManager.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="BusinessLogic\IAdminManager.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -289,6 +290,7 @@
     <Content Include="Scripts\angular-touch.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\angularControllers\adminManageCoursePageController.js" />
     <Content Include="Scripts\angularControllers\adminPageModalController.js" />
     <Content Include="Scripts\angularControllers\adminPageController.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -1112,10 +1114,10 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Scripts\version.json" />
     <Content Include="Views\Home\_CreateCourseModal.cshtml" />
+    <Content Include="Views\Admin\ManageCourse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Admin\" />
     <Folder Include="Views\Researcher\" />
   </ItemGroup>
   <ItemGroup>

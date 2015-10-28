@@ -1,9 +1,10 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Admin Panel";
 }
 
 <div class="row" ng-controller="adminPageController" ng-cloak>
     <div ng-init="courses = @ViewBag.CourseList" />
+    <div ng-init="basicUrl = '@ViewBag.BasicUrl'" />
     <div ng-init="createCourseModalTemplate = '@ViewBag.CreateCourseModalTemplate'" />
 
     <h3>Courses:</h3>
@@ -40,7 +41,7 @@
                     {{course.ClassListCount}}
                 </td>
                 <td style="text-align:center">
-                    <a href="#">
+                    <a href="#" ng-click="gotoManageCoursePage(course.Id)">
                         <i class="fa fa-cogs"></i>
                     </a>
                     <a href="#">

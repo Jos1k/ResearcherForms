@@ -6,5 +6,7 @@ using System.Text;
 namespace ResearcherForms.BusinessLogic {
 	public interface IAdminManager {
 		string GetAllCoursesByJSON();
+		long CreateCourse(string name);
+		string GetCourseByIdByJSON(long courseId);
 	}
 }

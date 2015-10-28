@@ -10,9 +10,8 @@ using System.Collections.Generic;
 namespace ResearcherForms.Models {
 	// You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
 	public class ApplicationUser : IdentityUser {
-		public long? CourseId { get; set; }
-		//[ForeignKey( "CourseId" )]
-		public virtual Course Course { get; set; }
+
+		public virtual ICollection<Course> Courses { get; set; }
 
 		public virtual ICollection<UserFormFieldData> UserFormsFieldData { get; set; }
 
@@ -30,11 +29,6 @@ namespace ResearcherForms.Models {
 		}
 		protected override void OnModelCreating( DbModelBuilder modelBuilder ) {
 			base.OnModelCreating( modelBuilder );
-
-			modelBuilder.Entity<ApplicationUser>()
-				.HasOptional( m => m.Course )
-				.WithMany( t => t.ClassList )
-				.HasForeignKey( m => m.CourseId );
 
 			modelBuilder.Entity<ResearchForm>()
 				.HasRequired( m => m.ResearchCourse )

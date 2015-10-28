@@ -49,24 +49,30 @@ namespace ResearcherForms {
 					Name = "Test Course 2"
 				}
 			};
-			courses.ForEach( x => context.Courses.Add( x ) );
+			context.Courses.AddRange( courses );
 			context.SaveChanges();
 
 			List<ApplicationUser> users = new List<ApplicationUser>(){
 				new ApplicationUser(){
 					Email = "Researcher1@researcher.com",
 					UserName = "Researcher1@researcher.com",
-					Course = context.Courses.First()
+					Courses = new List<Course>(){
+						context.Courses.First()
+					}
 				},
 				new ApplicationUser(){
 					Email = "Researcher2@researcher.com",
 					UserName = "Researcher2@researcher.com",
-					Course = context.Courses.First()
+					Courses = new List<Course>(){
+						context.Courses.First()
+					}
 				},
 				new ApplicationUser(){
 					Email = "Researcher3@researcher.com",
 					UserName = "Researcher3@researcher.com",
-					Course = context.Courses.Find(2)
+					Courses = new List<Course>(){
+						context.Courses.Find(2)
+					}
 				}
 			};
 
@@ -84,6 +90,13 @@ namespace ResearcherForms {
 				userManager.AddToRole( user.Id, StaticHelper.RoleNames.Researcher );
 			}
 
+			List<ResearchForm> forms = new List<ResearchForm>() {
+				new ResearchForm(){ Name = "Test Form 1", ResearchCourseId = courses[0].Id },
+				new ResearchForm(){ Name = "Test Form 2", ResearchCourseId = courses[0].Id },
+				new ResearchForm(){ Name = "Test Form 3", ResearchCourseId = courses[0].Id }
+			};
+			context.ResearchForms.AddRange( forms );
+			context.SaveChanges();
 		}
 	}
 }
