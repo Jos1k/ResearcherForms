@@ -291,6 +291,7 @@
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\angularControllers\adminManageCoursePageController.js" />
+    <Content Include="Scripts\angularControllers\adminAddExisitingUsersPageModalController.js" />
     <Content Include="Scripts\angularControllers\adminPageModalController.js" />
     <Content Include="Scripts\angularControllers\adminPageController.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -1115,6 +1116,7 @@
     <Content Include="Scripts\version.json" />
     <Content Include="Views\Home\_CreateCourseModal.cshtml" />
     <Content Include="Views\Admin\ManageCourse.cshtml" />
+    <Content Include="Views\Admin\_AddExistingUserModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

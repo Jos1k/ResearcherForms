@@ -3,18 +3,18 @@
 }
 
 <div class="row" ng-controller="adminManageCoursePageController" ng-cloak>
-    <div ng-init="course = @ViewBag.Course" />
+	<div ng-init="course = @ViewBag.Course" />
+    <div ng-init="addExistingUserModalTemplate = '@ViewBag.AddExistingUserToCourserModalTemplate'" />
     @*<div ng-init="changeCourseNameModalTemplate = '@ViewBag.ChangeCourseNameModalTemplate'" />
-        <div ng-init="removeItemsConfiramtionModalTemplate = '@ViewBag.RemoveItemsConfiramtionModalTemplate'" />
-        <div ng-init="createNewUserModalTemplate = '@ViewBag.CreateNewUserModalTemplate'" />
-        <div ng-init="addExistingUserModalTemplate = '@ViewBag.AddExistingUserModalTemplate'" />*@
+    <div ng-init="removeItemsConfiramtionModalTemplate = '@ViewBag.RemoveItemsConfiramtionModalTemplate'" />
+    <div ng-init="createNewUserModalTemplate = '@ViewBag.CreateNewUserModalTemplate'" />*@
 
     <h3>Course: {{course.name}}<button class="btn btn-primary">...</button></h3>
 
     <div class="panel panel-default">
         <div class="panel-heading">Researchers in this course</div>
         <div class="panel-body">
-            <button class="btn btn-success">Add existing</button>
+            <button class="btn btn-success" ng-click="showAddExisitingUserModal()">Add existing</button>
             <button class="btn btn-primary">Create new</button>
             <button class="btn btn-danger">Remove from course</button>
         </div>

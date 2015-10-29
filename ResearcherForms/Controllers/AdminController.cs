@@ -30,6 +30,21 @@ namespace ResearcherForms.Controllers {
 		public ActionResult GetCourseInfo( long courseId ) {
 			string courseForAdmin = _adminManager.GetCourseByIdByJSON( courseId );
 			ViewBag.Course = courseForAdmin;
+			ViewBag.AddExistingUserToCourserModalTemplate = 
+				StaticHelper.RenderPartialViewToString( this, "_AddExistingUserModal", null );
+			return View( "~/Views/Admin/ManageCourse.cshtml" );
+		}
+
+		[HttpPost]
+		public ActionResult AddExisitingUsersToCourseGetUsers( long courseId ) {
+			string users = _adminManager.GetExistingUsersNotIncludedInCourse( courseId );
+			return Json( users );
+		}
+
+		[HttpPost]
+		public ActionResult AddExisitingUsersToCourse( string[] userIds ) {
+			//string courseForAdmin = _adminManager.GetCourseByIdByJSON( courseId );
+			//ViewBag.Course = courseForAdmin;
 			return View( "~/Views/Admin/ManageCourse.cshtml" );
 		}
 	}

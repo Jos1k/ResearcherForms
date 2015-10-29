@@ -8,5 +8,6 @@ namespace ResearcherForms.BusinessLogic {
 		string GetAllCoursesByJSON();
 		long CreateCourse(string name);
 		string GetCourseByIdByJSON(long courseId);
+		string GetExistingUsersNotIncludedInCourse( long courseId );
 	}
 }

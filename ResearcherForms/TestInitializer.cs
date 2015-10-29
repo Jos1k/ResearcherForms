@@ -73,6 +73,14 @@ namespace ResearcherForms {
 					Courses = new List<Course>(){
 						context.Courses.Find(2)
 					}
+				},
+				new ApplicationUser(){
+					Email = "Researcher4@researcher.com",
+					UserName = "Researcher4@researcher.com"
+				},
+				new ApplicationUser(){
+					Email = "Researcher5@researcher.com",
+					UserName = "Researcher5@researcher.com"
 				}
 			};
 

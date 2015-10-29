@@ -42,8 +42,9 @@ namespace ResearcherForms.BusinessLogic {
 
 			return resultCourse.Id;
 		}
-		
+
 		public string GetCourseByIdByJSON( long courseId ) {
+
 			Course course = _dbContext.Courses.Find( courseId );
 			var courseForAdmin = new {
 				id = course.Id,
@@ -58,10 +59,34 @@ namespace ResearcherForms.BusinessLogic {
 					new {
 						id = form.Id,
 						name = form.Name
-					} 
+					}
 				)
 			};
 			return JsonConvert.SerializeObject( courseForAdmin );
+		}
+
+		public string GetExistingUsersNotIncludedInCourse( long courseId ) {
+			var usersInCourse = _dbContext.Courses.Find( courseId ).ClassList.ToList();
+			var usersNotInCourse = _dbContext.Users
+				.ToList()
+				.Where(
+				researcher =>
+					!usersInCourse.Contains( researcher )
+					&& _dbContext.Roles.First(
+						role=> role.Name == StaticHelper.RoleNames.Admin
+					)
+					.Users.Any(x=>x.UserId!=researcher.Id)
+				)
+				.Select(
+					researcher => new {
+						id = researcher.Id,
+						name = researcher.UserName,
+						email = researcher.Email
+					}
+				)
+				.ToList();
+
+			return JsonConvert.SerializeObject( usersNotInCourse );
 		}
 	}
 }
