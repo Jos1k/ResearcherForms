@@ -1,9 +1,10 @@
-﻿<div class="modal-content" style="border-radius: 0; border:none;">
+﻿@model long
+<div class="modal-content" style="border-radius: 0; border:none;">
     <div class="modal-header" style="background-color: #34495E; color: white;">
         <h5 class="modal-title"><b>Create Course</b></h5>
     </div>
     <div class="modal-body">
-        @*<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}">{{alert.msg}}</uib-alert>*@
+        <div ng-init="courseId = @Model" />
         <div class="form-group">
             <div class="panel panel-default">
                 <div class="panel-heading">Add existing user to this course</div>
@@ -34,7 +35,7 @@
         <button type="button" class="btn btn-danger" ng-click="cancel()">
             Cancel
         </button>
-        <button type="button" class="btn btn-success" ng-click="ok()" ng-disabled="selectedResearch()">
+        <button type="button" class="btn btn-success" ng-click="ok()" ng-disabled="isNotSelectedResearchers()">
             OK
         </button>
     </div>

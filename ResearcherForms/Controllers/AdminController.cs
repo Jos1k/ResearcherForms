@@ -30,8 +30,10 @@ namespace ResearcherForms.Controllers {
 		public ActionResult GetCourseInfo( long courseId ) {
 			string courseForAdmin = _adminManager.GetCourseByIdByJSON( courseId );
 			ViewBag.Course = courseForAdmin;
-			ViewBag.AddExistingUserToCourserModalTemplate = 
-				StaticHelper.RenderPartialViewToString( this, "_AddExistingUserModal", null );
+			ViewBag.AddExistingUserToCourserModalTemplate =
+				StaticHelper.RenderPartialViewToString( this, "_AddExistingUserModal", courseId );
+			ViewBag.RemoveExistingUserToCourserModalTemplate =
+				StaticHelper.RenderPartialViewToString( this, "_RemoveExistingUserModal", courseId );
 			return View( "~/Views/Admin/ManageCourse.cshtml" );
 		}
 
@@ -42,10 +44,15 @@ namespace ResearcherForms.Controllers {
 		}
 
 		[HttpPost]
-		public ActionResult AddExisitingUsersToCourse( string[] userIds ) {
-			//string courseForAdmin = _adminManager.GetCourseByIdByJSON( courseId );
-			//ViewBag.Course = courseForAdmin;
-			return View( "~/Views/Admin/ManageCourse.cshtml" );
+		public ActionResult AddExisitingUsersToCourse( string[] userIds, long courseId ) {
+			_adminManager.AddExistingUsersToCourse( userIds, courseId );
+			return Json( "" );
+		}
+
+		[HttpPost]
+		public ActionResult RemoveExisitingUsersFromCourse( string[] userIds, long courseId ) {
+			_adminManager.RemoveExistingUsersToCourse( userIds, courseId );
+			return Json( "" );
 		}
 	}
 }

@@ -88,5 +88,17 @@ namespace ResearcherForms.BusinessLogic {
 
 			return JsonConvert.SerializeObject( usersNotInCourse );
 		}
+
+		public void AddExistingUsersToCourse( string[] userIds, long courseId ) {
+			Course course = _dbContext.Courses.Find( courseId );
+			userIds.ToList().ForEach( userId => _dbContext.Users.Find( userId ).Courses.Add( course ) );
+			_dbContext.SaveChanges();
+		}
+
+		public void RemoveExistingUsersToCourse( string[] userIds, long courseId ) {
+			Course course = _dbContext.Courses.Find( courseId );
+			userIds.ToList().ForEach( userId => _dbContext.Users.Find( userId ).Courses.Remove( course ) );
+			_dbContext.SaveChanges();
+		}
 	}
 }
