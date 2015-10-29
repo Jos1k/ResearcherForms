@@ -120,5 +120,13 @@ namespace ResearcherForms.BusinessLogic {
 			course.Name = courseName;
 			_dbContext.SaveChanges();
 		}
+
+		public void AddUserToCourse( long courseId, string userId ) {
+			ApplicationDbContext dbContext = new ApplicationDbContext();
+			Course course = dbContext.Courses.Find( courseId );
+			ApplicationUser user = dbContext.Users.Find( userId );
+			course.ClassList.Add( user );
+			dbContext.SaveChanges();
+		}
 	}
 }

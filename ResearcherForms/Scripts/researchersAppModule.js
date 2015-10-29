@@ -5,5 +5,4 @@ researchersAppModule.controller('adminManageCoursePageController', adminManageCo
 researchersAppModule.controller('adminAddExisitingUsersPageModalController', adminAddExisitingUsersPageModalController);
 researchersAppModule.controller('adminRemoveExisitingUsersPageModalController', adminRemoveExisitingUsersPageModalController);
 researchersAppModule.controller('adminChangeCourseNamePageModalController', adminChangeCourseNamePageModalController);
-
-
+researchersAppModule.controller('adminAddNewUserPageModalController', adminAddNewUserPageModalController);

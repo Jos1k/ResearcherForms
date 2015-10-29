@@ -83,6 +83,23 @@
         //$uibModalInstance.close();
     };
 
+    $scope.showAddNewUserModal = function () {
+        var modalInstance = $uibModal.open({
+            animation: true,
+            template: $scope.addNewUserToCourserModalTemplate,
+            controller: 'adminAddNewUserPageModalController',
+            //size: "editCompany",
+        });
+
+        modalInstance.result.then(function (newUser) {
+            $scope.course.researchers.push(newUser);
+            modalInstance.close();
+        }, function (response) {
+            //$window.alert(response.statusText);
+        });
+        //$uibModalInstance.close();
+    };
+
     $scope.selectedUsers = function (fullObjects) {
         var selectedUsers = $.grep($scope.course.researchers, function (e) { return e.isSelected == true; });
         var selectedUserIds = [];

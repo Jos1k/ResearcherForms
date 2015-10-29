@@ -7,8 +7,7 @@
     <div ng-init="addExistingUserModalTemplate = '@ViewBag.AddExistingUserToCourserModalTemplate'" />
     <div ng-init="removeExistingUserModalTemplate = '@ViewBag.RemoveExistingUserToCourserModalTemplate'" />
     <div ng-init="changeCourseNameModalTemplate = '@ViewBag.ChangeCourseNameModalTemplate'" />
-    @*<div ng-init="removeItemsConfiramtionModalTemplate = '@ViewBag.RemoveItemsConfiramtionModalTemplate'" />
-    <div ng-init="createNewUserModalTemplate = '@ViewBag.CreateNewUserModalTemplate'" />*@
+    <div ng-init="addNewUserToCourserModalTemplate = '@ViewBag.AddNewUserToCourserModalTemplate'" />
 
     <h3>Course: {{course.name}}<button class="btn btn-primary" ng-click="showChangeCourseNameModal()">...</button></h3>
 
@@ -16,8 +15,8 @@
         <div class="panel-heading">Researchers in this course</div>
         <div class="panel-body">
             <button class="btn btn-success" ng-click="showAddExisitingUserModal()">Add existing</button>
-            <button class="btn btn-primary">Create new</button>
-            <button class="btn btn-danger" ng-click="showRemoveExisitingUserModal()">Remove from course</button>
+            <button class="btn btn-primary" ng-click="showAddNewUserModal()">Create new</button>
+            <button class="btn btn-danger" ng-click="showRemoveExisitingUserModal()" ng-disabled="selectedUsers(false).length==0">Remove from course</button>
         </div>
         <table class="table">
             <thead>

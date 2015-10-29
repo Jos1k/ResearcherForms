@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using ResearcherForms.BusinessLogic;
 using ResearcherForms.Models;
 
 namespace ResearcherForms.Controllers
@@ -17,15 +19,18 @@ namespace ResearcherForms.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+		private IAdminManager _adminManager;
 
-        public AccountController()
+		public AccountController( IAdminManager adminManager )
         {
+			_adminManager = adminManager;
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+		public AccountController( ApplicationUserManager userManager, ApplicationSignInManager signInManager )
         {
             UserManager = userManager;
             SignInManager = signInManager;
+
         }
 
         public ApplicationSignInManager SignInManager
@@ -171,6 +176,23 @@ namespace ResearcherForms.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+
+		[HttpPost]
+		[Authorize(Roles=StaticHelper.RoleNames.Admin)]
+		public ActionResult CreateNewUserOnCourse( string userName, string userEmail, string userPassword, long courseId ) {
+			try {
+				var user = new ApplicationUser { UserName = userName, Email = userEmail };
+				var result = UserManager.Create( user, userPassword );				
+				if( result.Succeeded ) {
+					_adminManager.AddUserToCourse( courseId, user.Id );
+					return Json( user.Id );
+				} else {
+					return new HttpStatusCodeResult( 500, result.Errors.First());
+				}
+			} catch( Exception ex ) {
+				return new HttpStatusCodeResult( 500, ex.Message );
+			}
+		}
 
         //
         // GET: /Account/ConfirmEmail

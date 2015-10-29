@@ -1,0 +1,42 @@
+﻿@model long
+<div class="modal-content" style="border-radius: 0; border:none;">
+    <div class="modal-header" style="background-color: #34495E; color: white;">
+        <h5 class="modal-title"><b>Create New User</b></h5>
+    </div>
+    <div class="modal-body">
+        <div ng-init="courseId = @Model" />
+        <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}">{{alert.msg}}</uib-alert>
+        <div class="form-group row">
+            <label for="userName" class="col-md-3 control-label">User Name:</label>
+            <div class="col-md-9">
+                <input type="text" id="userName" class="form-control" placeholder="User name" ng-model="userName">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="userEmail" class="col-md-3 control-label">User Email:</label>
+            <div class="col-md-9">
+                <input type="email" id="userEmail" class="form-control" placeholder="Email" ng-model="userEmail">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="userPassword" class="col-md-3 control-label">Password:</label>
+            <div class="col-md-9">
+                <input type="password" id="userPassword" class="form-control" placeholder="Password" ng-model="userPassword">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="userPasswordConfirm" class="col-md-3 control-label">Confirm Password:</label>
+            <div class="col-md-9">
+                <input type="password" id="userPasswordConfirm" class="form-control" placeholder="Confirm Password" ng-model="userPasswordConfirm">
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" ng-click="cancel()">
+            Cancel
+        </button>
+        <button type="button" class="btn btn-success" ng-click="ok()" ng-disabled="isAllFieldsNotEmpty()">
+            OK
+        </button>
+    </div>
+</div>

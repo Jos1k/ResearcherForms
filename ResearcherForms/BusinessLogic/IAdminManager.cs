@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ResearcherForms.Models;
 
 namespace ResearcherForms.BusinessLogic {
 	public interface IAdminManager {
@@ -11,7 +12,7 @@ namespace ResearcherForms.BusinessLogic {
 		string GetExistingUsersNotIncludedInCourse( long courseId );
 		void AddExistingUsersToCourse( string[] userIds, long courseId );
 		void RemoveExistingUsersToCourse( string[] userIds, long courseId );
-
 		void UpdateCourseName( string courseName, long courseId );
+		void AddUserToCourse( long courseId, string userId );
 	}
 }
