@@ -6,11 +6,11 @@
 	<div ng-init="course = @ViewBag.Course" />
     <div ng-init="addExistingUserModalTemplate = '@ViewBag.AddExistingUserToCourserModalTemplate'" />
     <div ng-init="removeExistingUserModalTemplate = '@ViewBag.RemoveExistingUserToCourserModalTemplate'" />
-    @*<div ng-init="changeCourseNameModalTemplate = '@ViewBag.ChangeCourseNameModalTemplate'" />
-    <div ng-init="removeItemsConfiramtionModalTemplate = '@ViewBag.RemoveItemsConfiramtionModalTemplate'" />
+    <div ng-init="changeCourseNameModalTemplate = '@ViewBag.ChangeCourseNameModalTemplate'" />
+    @*<div ng-init="removeItemsConfiramtionModalTemplate = '@ViewBag.RemoveItemsConfiramtionModalTemplate'" />
     <div ng-init="createNewUserModalTemplate = '@ViewBag.CreateNewUserModalTemplate'" />*@
 
-    <h3>Course: {{course.name}}<button class="btn btn-primary">...</button></h3>
+    <h3>Course: {{course.name}}<button class="btn btn-primary" ng-click="showChangeCourseNameModal()">...</button></h3>
 
     <div class="panel panel-default">
         <div class="panel-heading">Researchers in this course</div>

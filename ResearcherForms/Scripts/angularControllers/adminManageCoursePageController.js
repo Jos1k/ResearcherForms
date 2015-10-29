@@ -61,6 +61,28 @@
         //$uibModalInstance.close();
     };
 
+    $scope.showChangeCourseNameModal = function () {
+        var modalInstance = $uibModal.open({
+            animation: true,
+            template: $scope.changeCourseNameModalTemplate,
+            controller: 'adminChangeCourseNamePageModalController',
+            //size: "editCompany",
+            resolve: {
+                courseName: function () {
+                    return $scope.course.name;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (courseName) {
+            $scope.course.name = courseName;
+            modalInstance.close();
+        }, function (response) {
+            //$window.alert(response.statusText);
+        });
+        //$uibModalInstance.close();
+    };
+
     $scope.selectedUsers = function (fullObjects) {
         var selectedUsers = $.grep($scope.course.researchers, function (e) { return e.isSelected == true; });
         var selectedUserIds = [];

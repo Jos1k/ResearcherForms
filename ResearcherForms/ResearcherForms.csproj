@@ -290,9 +290,10 @@
     <Content Include="Scripts\angular-touch.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
-    <Content Include="Scripts\angularControllers\adminAddExisitingUsersPageModalController - Copy.js" />
-    <Content Include="Scripts\angularControllers\adminManageCoursePageController.js" />
+    <Content Include="Scripts\angularControllers\adminAddExisitingUsersPageModalController.js" />
     <Content Include="Scripts\angularControllers\adminRemoveExisitingUsersPageModalController.js" />
+    <Content Include="Scripts\angularControllers\adminManageCoursePageController.js" />
+    <Content Include="Scripts\angularControllers\adminChangeCourseNamePageModalController.js" />
     <Content Include="Scripts\angularControllers\adminPageModalController.js" />
     <Content Include="Scripts\angularControllers\adminPageController.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -1119,6 +1120,7 @@
     <Content Include="Views\Admin\ManageCourse.cshtml" />
     <Content Include="Views\Admin\_AddExistingUserModal.cshtml" />
     <Content Include="Views\Admin\_RemoveExistingUserModal.cshtml" />
+    <Content Include="Views\Admin\_ChangeCourseNameModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

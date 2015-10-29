@@ -34,6 +34,9 @@ namespace ResearcherForms.Controllers {
 				StaticHelper.RenderPartialViewToString( this, "_AddExistingUserModal", courseId );
 			ViewBag.RemoveExistingUserToCourserModalTemplate =
 				StaticHelper.RenderPartialViewToString( this, "_RemoveExistingUserModal", courseId );
+			ViewBag.ChangeCourseNameModalTemplate =
+				StaticHelper.RenderPartialViewToString( this, "_ChangeCourseNameModal", courseId );
+
 			return View( "~/Views/Admin/ManageCourse.cshtml" );
 		}
 
@@ -53,6 +56,16 @@ namespace ResearcherForms.Controllers {
 		public ActionResult RemoveExisitingUsersFromCourse( string[] userIds, long courseId ) {
 			_adminManager.RemoveExistingUsersToCourse( userIds, courseId );
 			return Json( "" );
+		}
+
+		[HttpPost]
+		public ActionResult UpdateCourseName( string courseName, long courseId ) {
+			try {
+				_adminManager.UpdateCourseName( courseName, courseId );
+				return Json( "" );
+			} catch( Exception ex ) {
+				return new HttpStatusCodeResult( 500, ex.Message );
+			}
 		}
 	}
 }

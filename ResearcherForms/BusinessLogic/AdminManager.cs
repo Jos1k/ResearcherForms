@@ -73,9 +73,9 @@ namespace ResearcherForms.BusinessLogic {
 				researcher =>
 					!usersInCourse.Contains( researcher )
 					&& _dbContext.Roles.First(
-						role=> role.Name == StaticHelper.RoleNames.Admin
+						role => role.Name == StaticHelper.RoleNames.Admin
 					)
-					.Users.Any(x=>x.UserId!=researcher.Id)
+					.Users.Any( x => x.UserId != researcher.Id )
 				)
 				.Select(
 					researcher => new {
@@ -98,6 +98,26 @@ namespace ResearcherForms.BusinessLogic {
 		public void RemoveExistingUsersToCourse( string[] userIds, long courseId ) {
 			Course course = _dbContext.Courses.Find( courseId );
 			userIds.ToList().ForEach( userId => _dbContext.Users.Find( userId ).Courses.Remove( course ) );
+			_dbContext.SaveChanges();
+		}
+
+		public void UpdateCourseName( string courseName, long courseId ) {
+
+			Course course = _dbContext.Courses.Find( courseId );
+			if( course.Name.ToLower() == courseName.ToLower() ) {
+				course.Name = courseName;
+				_dbContext.SaveChanges();
+				return;
+			}
+			else if( courseName.Length < 3 || courseName.Length > 25 ) {
+				throw new Exception( "Course should consist at least 3, but not more then 25 letters" );
+			} else if( _dbContext.Courses.Any( courseL =>
+						  courseL.Name.ToLower() == courseName.ToLower()
+					  )
+				  ) {
+				throw new Exception( "Course with such name already exist" );
+			}
+			course.Name = courseName;
 			_dbContext.SaveChanges();
 		}
 	}

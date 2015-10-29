@@ -11,5 +11,7 @@ namespace ResearcherForms.BusinessLogic {
 		string GetExistingUsersNotIncludedInCourse( long courseId );
 		void AddExistingUsersToCourse( string[] userIds, long courseId );
 		void RemoveExistingUsersToCourse( string[] userIds, long courseId );
+
+		void UpdateCourseName( string courseName, long courseId );
 	}
 }
