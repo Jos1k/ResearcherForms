@@ -7,6 +7,8 @@
     <div ng-init="removeExistingUserModalTemplate = '@ViewBag.RemoveExistingUserToCourserModalTemplate'" />
     <div ng-init="changeCourseNameModalTemplate = '@ViewBag.ChangeCourseNameModalTemplate'" />
     <div ng-init="addNewUserToCourserModalTemplate = '@ViewBag.AddNewUserToCourserModalTemplate'" />
+    <div ng-init="removeExistingFormsModalTemplate = '@ViewBag.RemoveExistingFormsModalTemplate'" />
+    
     @*$("#formBuilder").val()*@
     <div id="myModal" class="modal fade" role="dialog">
         @Html.Partial("~/Views/Admin/_AddNewFormModal.cshtml");
@@ -43,7 +45,7 @@
         <div class="panel-heading">Forms in this course</div>
         <div class="panel-body">
             <button class="btn btn-success" ng-click="showAddNewFormModal()">Add new</button>
-            <button class="btn btn-danger">Remove</button>
+            <button class="btn btn-danger" ng-click="showRemoveFormsModal()" ng-disabled="selectedForms(false).length==0">Remove</button>
         </div>
         <table class="table">
             <thead>

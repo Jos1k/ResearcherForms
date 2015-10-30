@@ -176,5 +176,19 @@ namespace ResearcherForms.BusinessLogic {
 
 			return JsonConvert.SerializeObject( new { id = form.Id, name = form.Name } );
 		}
+
+		public void RemoveResearchForm( long courseId, long[] formsId ) {
+
+			ApplicationDbContext dbContext = new ApplicationDbContext();
+			Course course = dbContext.Courses.Find( courseId );
+			List<ResearchForm> forms = course.Forms.Where( 
+				form => formsId.Contains( form.Id ) 
+			).ToList();
+
+			forms.ForEach(
+				form => dbContext.ResearchForms.Remove( form ) 
+			);
+			dbContext.SaveChanges();
+		}
 	}
 }

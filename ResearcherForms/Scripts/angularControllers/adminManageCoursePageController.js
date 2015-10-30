@@ -142,6 +142,32 @@
         });
     };
 
+    $scope.showRemoveFormsModal = function () {
+        var modalInstance = $uibModal.open({
+            animation: true,
+            template: $scope.removeExistingFormsModalTemplate,
+            controller: 'adminRemoveExisitingFormsPageModalController',
+            //size: "editCompany",
+            resolve: {
+                forms: function () {
+                    return $scope.selectedForms(false);
+                }
+            }
+        });
+
+        modalInstance.result.then(function () {
+            $scope.selectedForms(true).forEach(function (removedForm) {
+                var formIndex = $scope.getIndexOfArrayByProperty($scope.course.forms, 'id', removedForm.id);
+                $scope.course.forms.splice(formIndex, 1);
+            });
+            modalInstance.close();
+        }, function (response) {
+            //$window.alert(response.statusText);
+        });
+        //$uibModalInstance.close();
+    };
+
+
     $scope.showAddNewFormModal = function () {
         $('#myModal').modal('show');
     };
@@ -156,6 +182,18 @@
             selectedUsers.forEach(function (user) { selectedUserIds.push(user.id) });
         }
         return selectedUserIds;
+    };
+
+    $scope.selectedForms = function (fullObjects) {
+        var selectedForms = $.grep($scope.course.forms, function (e) { return e.isSelected == true; });
+        var selectedFormIds = [];
+        if (fullObjects == true) {
+            selectedForms.forEach(function (form) { selectedFormIds.push({ 'id': form.id, 'name': form.name }) });
+        }
+        else {
+            selectedForms.forEach(function (form) { selectedFormIds.push(form.id) });
+        }
+        return selectedFormIds;
     };
 
     $scope.getIndexOfArrayByProperty = function findWithAttr(array, attr, value) {

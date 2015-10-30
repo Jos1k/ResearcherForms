@@ -299,8 +299,8 @@
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\angularControllers\adminAddExisitingUsersPageModalController.js" />
-    <Content Include="Scripts\angularControllers\adminAddNewFormPageModalController.js" />
     <Content Include="Scripts\angularControllers\adminAddNewUserPageModalController.js" />
+    <Content Include="Scripts\angularControllers\adminRemoveExisitingFormsPageModalController.js" />
     <Content Include="Scripts\angularControllers\adminRemoveExisitingUsersPageModalController.js" />
     <Content Include="Scripts\angularControllers\adminManageCoursePageController.js" />
     <Content Include="Scripts\angularControllers\adminChangeCourseNamePageModalController.js" />
@@ -1134,6 +1134,7 @@
     <Content Include="Views\Admin\_ChangeCourseNameModal.cshtml" />
     <Content Include="Views\Admin\_AddNewUserModal.cshtml" />
     <Content Include="Views\Admin\_AddNewFormModal.cshtml" />
+    <Content Include="Views\Admin\_RemoveFormModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

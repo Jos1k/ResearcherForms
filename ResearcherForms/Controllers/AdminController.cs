@@ -40,7 +40,8 @@ namespace ResearcherForms.Controllers {
 				StaticHelper.RenderPartialViewToString( this, "_AddNewUserModal", courseId );
 			ViewBag.AddNewFormToCourserModalTemplate =
 				StaticHelper.RenderPartialViewToString( this, "_AddNewFormModal", courseId );
-
+			ViewBag.RemoveExistingFormsModalTemplate =
+				StaticHelper.RenderPartialViewToString( this, "_RemoveFormModal", courseId );
 			return View( "~/Views/Admin/ManageCourse.cshtml" );
 		}
 
@@ -80,6 +81,12 @@ namespace ResearcherForms.Controllers {
 			} catch( Exception ex ) {
 				return new HttpStatusCodeResult( 500, ex.Message );
 			}
+		}
+
+		[HttpPost]
+		public ActionResult RemoveResearchForm( long courseId ,long[] formIds ) {
+			_adminManager.RemoveResearchForm( courseId, formIds );
+			return Json( "" );
 		}
 	}
 }
