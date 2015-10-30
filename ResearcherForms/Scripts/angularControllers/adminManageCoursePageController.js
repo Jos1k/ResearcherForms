@@ -134,7 +134,7 @@
             }
         })
         .then(function (response) {
-            $scope.course.forms.push(response.data);
+            $scope.course.forms.push(JSON.parse(response.data));
             $scope.formModalCancel();
         }, function (response) {
             $scope.alertsNewForm[0] = { type: 'danger', msg: response.statusText };

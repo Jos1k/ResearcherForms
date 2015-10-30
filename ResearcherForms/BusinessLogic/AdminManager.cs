@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using Newtonsoft.Json;
 using ResearcherForms.Models;
+using YAXLib;
 
 namespace ResearcherForms.BusinessLogic {
 
@@ -108,8 +109,7 @@ namespace ResearcherForms.BusinessLogic {
 				course.Name = courseName;
 				_dbContext.SaveChanges();
 				return;
-			}
-			else if( courseName.Length < 3 || courseName.Length > 25 ) {
+			} else if( courseName.Length < 3 || courseName.Length > 25 ) {
 				throw new Exception( "Course should consist at least 3, but not more then 25 letters" );
 			} else if( _dbContext.Courses.Any( courseL =>
 						  courseL.Name.ToLower() == courseName.ToLower()
@@ -127,6 +127,21 @@ namespace ResearcherForms.BusinessLogic {
 			ApplicationUser user = dbContext.Users.Find( userId );
 			course.ClassList.Add( user );
 			dbContext.SaveChanges();
+		}
+
+		public string CreateFormByJSON( long courseId, string formName, string formBody ) {
+			YAXSerializer ser = new YAXSerializer( typeof( dynamic ) );
+			dynamic _formBody = ser.Deserialize( formBody );
+	
+			ApplicationDbContext dbContext = new ApplicationDbContext();
+			ResearchForm form = new ResearchForm(){
+				Name = formName,
+				ResearchCourseId = courseId
+			};
+			dbContext.ResearchForms.Add(form);
+			dbContext.SaveChanges();
+
+			return JsonConvert.SerializeObject(new {id = form.Id, name = form.Name});
 		}
 	}
 }

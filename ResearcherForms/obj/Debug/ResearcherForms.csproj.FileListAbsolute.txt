@@ -220,3 +220,6 @@ D:\Freelance\ResearchForms\ResearcherForms\bin\Microsoft.Owin.Security.Microsoft
 D:\Freelance\ResearchForms\ResearcherForms\obj\Debug\ResearcherForms.dll
 D:\Freelance\ResearchForms\ResearcherForms\obj\Debug\ResearcherForms.pdb
 D:\Freelance\ResearchForms\ResearcherForms\obj\Debug\ResearcherForms.csprojResolveAssemblyReference.cache
+D:\Freelance\ResearchForms\ResearcherForms\bin\YAXLib.dll
+D:\Freelance\ResearchForms\ResearcherForms\bin\YAXLib.pdb
+D:\Freelance\ResearchForms\ResearcherForms\bin\YAXLib.xml
