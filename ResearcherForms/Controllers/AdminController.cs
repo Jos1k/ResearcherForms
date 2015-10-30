@@ -71,5 +71,10 @@ namespace ResearcherForms.Controllers {
 				return new HttpStatusCodeResult( 500, ex.Message );
 			}
 		}
+
+		[HttpPost]
+		public ActionResult AddNewForm( long courseId, string formName, string formBody ) {
+			return Json( "" );
+		}
 	}
 }

@@ -1,5 +1,6 @@
 ﻿var adminManageCoursePageController = function ($scope, $http, $window, $uibModal) {
 
+    $scope.alertsNewForm = [];
     $scope.showAddExisitingUserModal = function () {
         $http({
             method: 'POST',
@@ -108,28 +109,41 @@
         $scope.formName = '';
     };
 
-    $scope.showAddNewFormModal = function () {
+    $scope.validationOnNewFormModalIsDisabled = function () {
+        if ($scope.formName && $scope.formName.length > 5) {
+            return false;
+        }
+        return true;
+    };
+    //&& $("#formBuilder").val().length > 0
 
-        $('#myModal').modal('show');
+    $scope.addNewForm = function () {
+        if ($("#formBuilder").val().length == 0) {
+            $scope.alertsNewForm[0] = { type: 'danger', msg: 'Form should not be empty!' };
+            return;
+        }
 
-        //var modalInstance = $uibModal.open({
-        //    animation: true,
-        //    template: $scope.addNewFormToCourserModalTemplate,
-        //    controller: 'adminAddNewFormPageModalController',
-        //    size: "addForm",
-        //});
-
-        //modalInstance.result.then(function (newForm) {
-        //    $scope.course.forms.push(newForm);
-        //    modalInstance.close();
-        //}, function (response) {
-        //    //$window.alert(response.statusText);
-        //});
-        ////$uibModalInstance.close();
+        $http({
+            method: 'POST',
+            url: '/Admin/AddNewForm',
+            headers: { 'Content-Type': 'application/json;' },
+            data: {
+                'courseId': $scope.course.id,
+                'formName': $scope.formName,
+                'formBody': $("#formBuilder").val()
+            }
+        })
+        .then(function (response) {
+            $scope.course.forms.push(response.data);
+            $scope.formModalCancel();
+        }, function (response) {
+            $scope.alertsNewForm[0] = { type: 'danger', msg: response.statusText };
+        });
     };
 
-
-
+    $scope.showAddNewFormModal = function () {
+        $('#myModal').modal('show');
+    };
 
     $scope.selectedUsers = function (fullObjects) {
         var selectedUsers = $.grep($scope.course.researchers, function (e) { return e.isSelected == true; });
