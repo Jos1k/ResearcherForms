@@ -223,3 +223,6 @@ D:\Freelance\ResearchForms\ResearcherForms\obj\Debug\ResearcherForms.csprojResol
 D:\Freelance\ResearchForms\ResearcherForms\bin\YAXLib.dll
 D:\Freelance\ResearchForms\ResearcherForms\bin\YAXLib.pdb
 D:\Freelance\ResearchForms\ResearcherForms\bin\YAXLib.xml
+E:\Development\ResearcherFormsGit\ResearcherForms\bin\YAXLib.dll
+E:\Development\ResearcherFormsGit\ResearcherForms\bin\YAXLib.pdb
+E:\Development\ResearcherFormsGit\ResearcherForms\bin\YAXLib.xml

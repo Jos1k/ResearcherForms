@@ -107,6 +107,7 @@
         $("#formBuilder").val('');
         $("#frmb-0").empty();
         $scope.formName = '';
+        $scope.alertsNewForm = [];
     };
 
     $scope.validationOnNewFormModalIsDisabled = function () {

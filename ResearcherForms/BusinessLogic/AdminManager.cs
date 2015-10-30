@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using Newtonsoft.Json;
 using ResearcherForms.Models;
+using ResearcherForms.Models.FormsXMLModels;
 using YAXLib;
 
 namespace ResearcherForms.BusinessLogic {
@@ -130,18 +131,50 @@ namespace ResearcherForms.BusinessLogic {
 		}
 
 		public string CreateFormByJSON( long courseId, string formName, string formBody ) {
-			YAXSerializer ser = new YAXSerializer( typeof( dynamic ) );
-			dynamic _formBody = ser.Deserialize( formBody );
-	
+
+			if( formName.Length < 5 || formName.Length > 25 ) {
+				throw new Exception( "Form name should consist at least 5, but not more then 25 letters" );
+			} else if( _dbContext.ResearchForms.Any( formL =>
+						  formL.Name.ToLower() == formName.ToLower()
+					  )
+				  ) {
+				throw new Exception( "Form with such name already exist" );
+			}
+
+			formtemplate _formBody = formBody.ParseXML<formtemplate>();
+
+			if( _formBody.fields == null || _formBody.fields.Count() == 0 ) {
+				throw new Exception( "Form could not be empty!" );
+			}
+
+			List<Field> fields = _formBody.fields.ToList().Select( field =>
+				new Field() {
+					Name = field.name,
+					Description = field.description,
+					FieldType = StaticHelper.ControlTypes[field.type],
+					Label = field.label,
+					Options = field.option == null
+					? null
+					: field.option.Select( option =>
+						new Option() {
+							Name = option.Value,
+							Value = option.value
+						}
+					)
+					.ToList()
+				}
+			).ToList();
+
 			ApplicationDbContext dbContext = new ApplicationDbContext();
-			ResearchForm form = new ResearchForm(){
+			ResearchForm form = new ResearchForm() {
 				Name = formName,
-				ResearchCourseId = courseId
+				ResearchCourseId = courseId,
+				Fields = fields
 			};
-			dbContext.ResearchForms.Add(form);
+			dbContext.ResearchForms.Add( form );
 			dbContext.SaveChanges();
 
-			return JsonConvert.SerializeObject(new {id = form.Id, name = form.Name});
+			return JsonConvert.SerializeObject( new { id = form.Id, name = form.Name } );
 		}
 	}
 }

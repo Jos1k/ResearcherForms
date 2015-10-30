@@ -12,15 +12,16 @@ namespace ResearcherForms.Models {
 			public const string Researcher = "Researcher";
 		}
 
-		public enum ControlTypes {
-			DateField,
-			Checkbox,
-			CheckboxGroup,
-			RadioGroup,
-			RichTextEditor,
-			SelectField,
-			TextField
-		}
+		public static Dictionary<string, int> ControlTypes = new Dictionary<string, int>{
+			{"autocomplete",0},
+			{"date",1},
+			{"checkbox",2},
+			{"checkbox-group",3},
+			{"radio-group",4},
+			{"rich-text",5},
+			{"select",6},
+			{"text",7}
+		};
 
 		public static string RenderPartialViewToString( Controller controller, string viewName, object model ) {
 			controller.ViewData.Model = model;

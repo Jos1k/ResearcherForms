@@ -154,8 +154,9 @@
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="YAXLib">
+    <Reference Include="YAXLib, Version=2.13.0.0, Culture=neutral, PublicKeyToken=7cc39f8266ad1835, processorArchitecture=MSIL">
       <HintPath>..\packages\YAXLib.2.13\lib\YAXLib.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -213,6 +214,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="BusinessLogic\AdminManager.cs" />
+    <Compile Include="BusinessLogic\DynamicXml.cs" />
+    <Compile Include="BusinessLogic\ParseHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -225,6 +228,7 @@
     <Compile Include="Models\CourseModel.cs" />
     <Compile Include="Models\FieldDataModel.cs" />
     <Compile Include="Models\FieldModel.cs" />
+    <Compile Include="Models\FormsXMLModels\FormModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\OptionModel.cs" />
