@@ -1,16 +1,18 @@
 ﻿@{
     ViewBag.Title = "Manage Course";
 }
-
 <div class="row" ng-controller="adminManageCoursePageController" ng-cloak>
-	<div ng-init="course = @ViewBag.Course" />
+    <div ng-init="course = @ViewBag.Course" />
     <div ng-init="addExistingUserModalTemplate = '@ViewBag.AddExistingUserToCourserModalTemplate'" />
     <div ng-init="removeExistingUserModalTemplate = '@ViewBag.RemoveExistingUserToCourserModalTemplate'" />
     <div ng-init="changeCourseNameModalTemplate = '@ViewBag.ChangeCourseNameModalTemplate'" />
     <div ng-init="addNewUserToCourserModalTemplate = '@ViewBag.AddNewUserToCourserModalTemplate'" />
+    @*$("#formBuilder").val()*@
+    <div id="myModal" class="modal fade" role="dialog">
+        @Html.Partial("~/Views/Admin/_AddNewFormModal.cshtml");
+    </div>
 
     <h3>Course: {{course.name}}<button class="btn btn-primary" ng-click="showChangeCourseNameModal()">...</button></h3>
-
     <div class="panel panel-default">
         <div class="panel-heading">Researchers in this course</div>
         <div class="panel-body">
@@ -37,11 +39,10 @@
             </tbody>
         </table>
     </div>
-
     <div class="panel panel-default">
         <div class="panel-heading">Forms in this course</div>
         <div class="panel-body">
-            <button class="btn btn-success">Add new</button>
+            <button class="btn btn-success" ng-click="showAddNewFormModal()">Add new</button>
             <button class="btn btn-danger">Remove</button>
         </div>
         <table class="table">
@@ -73,3 +74,9 @@
         </table>
     </div>
 </div>
+<script>
+    $(function () {
+        'use strict';
+        $('textarea').formBuilder();
+    });
+</script>

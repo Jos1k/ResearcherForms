@@ -1,0 +1,32 @@
+﻿<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Create New Form</h4>
+        </div>
+        <div class="modal-body">
+            <div class="container">
+                <div class="row">
+                    <label for="formName" class="col-md-3 control-label">Form Name:</label>
+                    <div class="col-md-9">
+                        <input type="text" id="formName" class="form-control" placeholder="Form Name" ng-model="formName">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div id="main_content_wrap" class="outer">
+                        <section id="main_content" class="inner">
+                            <form action="">
+                                <textarea name="formBuilder" id="formBuilder" cols="30" rows="10"></textarea>
+                            </form>
+                            <br style="clear:both">
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+	        <button type="button" class="btn btn-danger" ng-click="formModalCancel()">Cancel</button>
+            <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
+        </div>
+    </div>
+</div>

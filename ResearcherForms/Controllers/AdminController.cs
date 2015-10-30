@@ -38,6 +38,8 @@ namespace ResearcherForms.Controllers {
 				StaticHelper.RenderPartialViewToString( this, "_ChangeCourseNameModal", courseId );
 			ViewBag.AddNewUserToCourserModalTemplate =
 				StaticHelper.RenderPartialViewToString( this, "_AddNewUserModal", courseId );
+			ViewBag.AddNewFormToCourserModalTemplate =
+				StaticHelper.RenderPartialViewToString( this, "_AddNewFormModal", courseId );
 
 			return View( "~/Views/Admin/ManageCourse.cshtml" );
 		}

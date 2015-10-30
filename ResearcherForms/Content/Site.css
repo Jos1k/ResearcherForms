@@ -19,7 +19,61 @@
 .modal-createCourse {
 width:400px;
 }
+.modal-addForm .modal-content {
+	width: 1000px;
+	min-height: 500px;
+
+}
 .modal-createCourse .modal-content .modal-content .modal-body {
 	padding-bottom:0px;
 }
 
+#myModal .modal-dialog .modal-content {
+	width: 600px;
+}
+
+.frmb-wrap h4, .cb-wrap h4 {
+	 display:none 
+}
+
+#frmb-0-cb-wrap {
+	padding-top: 20px;
+}
+
+.cb-wrap {
+    width: 25%;
+}
+
+.frmb-wrap {
+	width: 77%;
+	padding-top: 20px;
+}
+
+ul.frmb {
+	min-height: 370px !important; 
+}
+
+.frm-fld.name-wrap,
+.frm-fld.access-wrap,
+.save-btn-wrap,
+.view-xml {
+  display: none;
+}
+
+#myModal .modal-dialog .modal-content .modal-body {
+	padding-bottom:0px;
+}
+
+.frmb li {
+	background-color: #EDEDED !important;
+}
+
+
+.radio input[type="radio"], .radio-inline input[type="radio"], .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"] {
+     float: inherit;
+     margin-left: 0; 
+}
+
+.frmb-control li {
+	background-color: #EDEDED !important;
+}

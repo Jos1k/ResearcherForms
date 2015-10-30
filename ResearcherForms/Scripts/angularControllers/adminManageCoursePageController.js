@@ -100,6 +100,37 @@
         //$uibModalInstance.close();
     };
 
+
+    $scope.formModalCancel = function () {
+        $('#myModal').modal('hide');
+        $("#formBuilder").val('');
+        $("#frmb-0").empty();
+        $scope.formName = '';
+    };
+
+    $scope.showAddNewFormModal = function () {
+
+        $('#myModal').modal('show');
+
+        //var modalInstance = $uibModal.open({
+        //    animation: true,
+        //    template: $scope.addNewFormToCourserModalTemplate,
+        //    controller: 'adminAddNewFormPageModalController',
+        //    size: "addForm",
+        //});
+
+        //modalInstance.result.then(function (newForm) {
+        //    $scope.course.forms.push(newForm);
+        //    modalInstance.close();
+        //}, function (response) {
+        //    //$window.alert(response.statusText);
+        //});
+        ////$uibModalInstance.close();
+    };
+
+
+
+
     $scope.selectedUsers = function (fullObjects) {
         var selectedUsers = $.grep($scope.course.researchers, function (e) { return e.isSelected == true; });
         var selectedUserIds = [];

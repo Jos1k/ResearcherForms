@@ -1,6 +1,6 @@
 /*
 formBuilder - git@github.com:kevinchappell/formBuilder.git
-Version: 1.2.0
+Version: 1.3.5
 Author: Kevin Chappell <kevin.b.chappell@gmail.com>
 */
 'use strict';
@@ -144,9 +144,11 @@ Author: Kevin Chappell <kevin.b.chappell@gmail.com>
     };
 
     /**
-     * [initTooltip description]
-     * @param  {[type]} tt [description]
-     * @return {[type]}    [description]
+     * hide and show mouse tracking tooltips, only used for disabled
+     * fields in the editor.
+     * @todo   remove or refactor to make better use
+     * @param  {object} tt jQuery option with nexted tooltip
+     * @return {void}
      */
     _helpers.initTooltip = function (tt) {
       var tooltip = tt.find('.tooltip');
@@ -172,13 +174,35 @@ Author: Kevin Chappell <kevin.b.chappell@gmail.com>
 
     // updatePreview will generate the preview for radio and checkbox groups
     _helpers.updatePreview = function (field) {
-      var preview;
+      var fieldClass = field.attr('class');
 
-      // $('.sortable-options li', field).each(function() {
-      //   var option = $('.select-option', $(this))[0].outerHTML;
-      //   var label = $('.option-label', $(this)).val();
-      //   preview += option + ' ' + label + '<br/>';
-      // });
+      if (fieldClass.indexOf('ui-sortable-handle') !== -1) {
+        return;
+      }
+
+      fieldClass = fieldClass.replace(' form-field', '');
+
+      var preview,
+          previewData = {
+        type: fieldClass,
+        label: $('.fld-label', field).val()
+      };
+
+      if (fieldClass.match(/(select|checkbox-group|radio-group)/)) {
+        previewData.values = [];
+
+        $('.sortable-options li', field).each(function () {
+          var option = {};
+          option.selected = $('.select-option', $(this)).is(':checked');
+          option.value = $('.option-value', $(this)).val();
+          option.label = $('.option-label', $(this)).val();
+
+          previewData.values.push(option);
+        });
+      }
+
+      preview = fieldPreview(previewData);
+
       $('.prev-holder', field).html(preview);
     };
 
@@ -498,6 +522,7 @@ Author: Kevin Chappell <kevin.b.chappell@gmail.com>
     elem.getTemplate = function () {
       var xml = elem.val() !== '' ? $.parseXML(elem.val()) : false,
           fields = $(xml).find('field');
+
       if (fields.length > 0) {
         fields.each(function () {
           prepFieldVars($(this));
@@ -532,34 +557,35 @@ Author: Kevin Chappell <kevin.b.chappell@gmail.com>
 
     var prepFieldVars = function prepFieldVars($field, isNew) {
       isNew = isNew || false;
-      var fType = $field.data('attrs').type,
+
+      var fieldAttrs = $field.data('attrs') || {},
+          fType = fieldAttrs.type || $field.attr('type'),
+          isMultiple = fType.match(/(select|checkbox-group|radio-group)/),
           values = {};
+
       values.label = _helpers.htmlEncode($field.attr('label'));
-      values.name = isNew ? nameAttr($field) : $field.name;
+      values.name = isNew ? nameAttr($field) : fieldAttrs.name || $field.attr('name');
       values.role = $field.attr('role');
       values.required = $field.attr('required');
       values.maxLength = $field.attr('max-length');
       values.type = fType;
       values.description = $field.attr('description') !== undefined ? _helpers.htmlEncode($field.attr('description')) : '';
-      if (fType === 'checkbox') {
-        $field.children().each(function () {
-          values.push([$field.text(), this.baseline]);
-        });
-      } else if (fType === 'select' || fType === 'checkbox-group') {
-        values.multiple = $field.hasClass('checkbox-group') ? true : $field.attr('style') === 'multiple' ? true : false;
+
+      if (isMultiple) {
+        values.multiple = true;
         values.values = [];
         $field.children().each(function (i) {
-          values.values.push({
-            value: $field.text(),
+          var value = {
+            label: $(this).text(),
+            value: $(this).attr('value'),
             selected: $field.attr('default') === i ? true : false
-          });
+          };
+          values.values.push(value);
         });
       }
 
       appendNewField(values);
-
       $formWrap.removeClass('empty');
-
       disabledBeforeAfter();
     };
 
@@ -582,16 +608,12 @@ Author: Kevin Chappell <kevin.b.chappell@gmail.com>
       if (!values.values || !values.values.length) {
         values.values = [{
           selected: 'false',
-          value: {
-            label: 'Option 1',
-            value: 'option-1'
-          }
+          label: 'Option 1',
+          value: 'option-1'
         }, {
           selected: 'false',
-          value: {
-            label: 'Option 2',
-            value: 'option-2'
-          }
+          label: 'Option 2',
+          value: 'option-2'
         }];
       }
 
@@ -609,21 +631,14 @@ Author: Kevin Chappell <kevin.b.chappell@gmail.com>
       field += '</div>';
       field += '<ol class="sortable-options">';
       for (i = 0; i < values.values.length; i++) {
-        field += selectFieldOptions(values.values[i].value, name, values.values[i].selected, values.multiple);
+        field += selectFieldOptions(values.values[i], name, values.values[i].selected, values.multiple);
       }
       field += '</ol>';
       field += '<div class="field_actions"><a href="#" class="add add_opt"><strong>' + opts.messages.add + '</strong></a> | <a href="#" class="close_field">' + opts.messages.close + '</a></div>';
       field += '</div>';
       appendFieldLi(opts.messages.select, field, values);
 
-      $('.sortable-options').sortable({
-        // stop: function (event, ui) {
-        //   if ($.browser.msie && parseInt($.browser.version, 10) < 9) {
-        //     $("li a.btn.remove", $(this)).css("display", "inline-block");
-        //     $("li:eq(0) .remove, li:eq(1) .remove", $(this)).css("display", "none");
-        //   }
-        // }
-      }); // making the dynamically added option fields sortable.
+      $('.sortable-options').sortable(); // making the dynamically added option fields sortable.
     };
 
     var appendNewField = function appendNewField(values) {
@@ -666,7 +681,7 @@ Author: Kevin Chappell <kevin.b.chappell@gmail.com>
           key,
           roles = values.role !== undefined ? values.role.split(',') : [];
       var fieldLabel = $('<div>', {
-        'class': 'frm-fld'
+        'class': 'frm-fld label-wrap'
       });
       $('<label/>').html(opts.messages.label + ' *').appendTo(fieldLabel);
       $('<input>', {
@@ -685,10 +700,10 @@ Author: Kevin Chappell <kevin.b.chappell@gmail.com>
       advFields += '<div class="frm-fld description-wrap"><label>' + opts.messages.description + '</label>';
       advFields += '<input type="text" name="description" value="' + values.description + '" class="fld-description" id="description-' + lastID + '" /></div>';
 
-      advFields += '<div class="frm-fld name_wrap"><label>' + opts.messages.name + ' <span class="required">*</span></label>';
+      advFields += '<div class="frm-fld name-wrap"><label>' + opts.messages.name + ' <span class="required">*</span></label>';
       advFields += '<input type="text" name="name" value="' + values.name + '" class="fld-name" id="title-' + lastID + '" /></div>';
 
-      advFields += '<div class="frm-fld"><label>' + opts.messages.roles + '</label>';
+      advFields += '<div class="frm-fld access-wrap"><label>' + opts.messages.roles + '</label>';
 
       advFields += '<input type="checkbox" name="enable_roles" value="" ' + (values.role !== undefined ? 'checked' : '') + ' id="enable_roles-' + lastID + '"/> <label for="enable_roles-' + lastID + '" class="roles_label">' + opts.messages.limitRole + '</label>';
       advFields += '<div class="frm-fld available-roles" ' + (values.role !== undefined ? 'style="display:block"' : '') + '>';
@@ -701,7 +716,7 @@ Author: Kevin Chappell <kevin.b.chappell@gmail.com>
       advFields += '</div></div>';
 
       // if field type is not checkbox, checkbox/radio group or select list, add max length
-      if ($.inArray(values.type, ['checkbox', 'select', 'checkbox-group', 'date', 'autocomplete']) < 0) {
+      if ($.inArray(values.type, ['checkbox', 'select', 'checkbox-group', 'date', 'autocomplete', 'radio-group']) < 0) {
         advFields += '<div class="frm-fld"><label class="max-length-label">' + opts.messages.maxLength + '</label>';
         advFields += '<input type="text" name="max-length" max-length="4" value="' + (values.maxLength !== undefined ? values.maxLength : '') + '" class="fld-max-length" id="max-length-' + lastID + '" /></div>';
       }
@@ -723,7 +738,7 @@ Author: Kevin Chappell <kevin.b.chappell@gmail.com>
       li += '<div class="legend">';
       li += delBtn;
       li += '<span id="txt-title-' + lastID + '" class="field-label">' + label + '</span>' + tooltip + '<span class="required-asterisk" ' + (required === 'true' ? 'style="display:inline"' : '') + '> *</span>' + toggleBtn + '</div>';
-      li += fieldPreview(values);
+      li += '<div class="prev-holder">' + fieldPreview(values) + '</div>';
       li += '<div id="frm-' + lastID + '-fld" class="frm-holder">';
       li += '<div class="form-elements">';
       li += '<div class="frm-fld">';
@@ -764,7 +779,7 @@ Author: Kevin Chappell <kevin.b.chappell@gmail.com>
           var options;
           attrs.values.reverse();
           for (i = attrs.values.length - 1; i >= 0; i--) {
-            options += '<option value="' + attrs.values[i].value.value + '">' + attrs.values[i].value.label + '</option>';
+            options += '<option value="' + attrs.values[i].value + '">' + attrs.values[i].label + '</option>';
           }
           preview = '<' + attrs.type + ' class="no-drag">' + options + '</' + attrs.type + '>';
           break;
@@ -773,7 +788,7 @@ Author: Kevin Chappell <kevin.b.chappell@gmail.com>
           var type = attrs.type.replace('-group', '');
           attrs.values.reverse();
           for (i = attrs.values.length - 1; i >= 0; i--) {
-            preview += '<div><input type="' + type + '" id="' + type + '-' + epoch + '-' + i + '" value="' + attrs.values[i].value.value + '" /><label for="' + type + '-' + epoch + '-' + i + '">' + attrs.values[i].value.label + '</label></div>';
+            preview += '<div><input type="' + type + '" id="' + type + '-' + epoch + '-' + i + '" value="' + attrs.values[i].value + '" /><label for="' + type + '-' + epoch + '-' + i + '">' + attrs.values[i].label + '</label></div>';
           }
           break;
         case 'text':
@@ -790,14 +805,12 @@ Author: Kevin Chappell <kevin.b.chappell@gmail.com>
           preview = '<' + attrs.type + '></' + attrs.type + '>';
       }
 
-      preview = '<div class="prev-holder">' + preview + '</div>';
-
       return preview;
     };
 
     // Select field html, since there may be multiple
-    var selectFieldOptions = function selectFieldOptions(values, name, selected, multiple) {
-      var selectedType = multiple ? 'checkbox' : 'radio';
+    var selectFieldOptions = function selectFieldOptions(values, name, selected, multipleSelect) {
+      var selectedType = multipleSelect ? 'checkbox' : 'radio';
 
       if (typeof values !== 'object') {
         values = {
@@ -805,8 +818,8 @@ Author: Kevin Chappell <kevin.b.chappell@gmail.com>
           value: ''
         };
       } else {
-        values.label = values.hasOwnProperty('label') ? values.label : '';
-        values.value = values.hasOwnProperty('value') ? values.value : '';
+        values.label = values.label || '';
+        values.value = values.value || '';
       }
 
       field = '<li>';
@@ -835,12 +848,12 @@ Author: Kevin Chappell <kevin.b.chappell@gmail.com>
     });
 
     // toggle fields
-    $sortableFields.delegate('.toggle-form', 'click', function (e) {
+    $sortableFields.on('click', '.toggle-form', function (e) {
       e.preventDefault();
       var targetID = $(this).attr('id');
       $(this).toggleClass('open').parent().next('.prev-holder').slideToggle(250);
       $(document.getElementById(targetID + '-fld')).slideToggle(250, function () {
-        // do something after attr toggle
+        _helpers.save();
       });
     });
 
@@ -934,6 +947,10 @@ Author: Kevin Chappell <kevin.b.chappell@gmail.com>
           $(this).remove();
           _helpers.save();
         });
+      }
+
+      if ($('.form-field', $sortableFields).length === 1) {
+        $formWrap.addClass('empty');
       }
     });
 
@@ -1107,7 +1124,7 @@ Author: Kevin Chappell <kevin.b.chappell@gmail.com>
     $(document.getElementById(frmbID + '-edit-names')).click(function (e) {
       e.preventDefault();
       $(this).toggleClass('active');
-      $('.name_wrap', $sortableFields).slideToggle(250, function () {
+      $('.name-wrap', $sortableFields).slideToggle(250, function () {
         $formWrap.toggleClass('edit-names');
       });
     });
@@ -1176,9 +1193,10 @@ Author: Kevin Chappell <kevin.b.chappell@gmail.com>
               var required = $('input.required', $field).is(':checked') ? 'required="true" ' : 'required="false" ',
                   multipleChecked = $('input[name="multiple"]', $field).is(':checked'),
                   multiple = multipleChecked ? 'style="multiple" ' : '',
-                  t = $field.attr(opts.attributes[att]),
+                  t = $field.attr(opts.attributes[att]).replace(' form-field', ''),
                   // field type
-              type = 'type="' + t + '" ',
+              multipleField = t.match(/(select|checkbox-group|radio-group)/),
+                  type = 'type="' + t + '" ',
                   fName = 'name="' + $('input.fld-name', $field).val() + '" ',
                   fLabel = 'label="' + $('input.fld-label', $field).val() + '" ',
                   roleVals = $.map($('input.roles-field:checked', $field), function (n) {
@@ -1188,17 +1206,17 @@ Author: Kevin Chappell <kevin.b.chappell@gmail.com>
                   desc = 'description="' + $('input.fld-description', $field).val() + '" ',
                   maxLengthVal = $('input.fld-max-length', $field).val(),
                   maxLength = 'max-length="' + (maxLengthVal !== undefined ? maxLengthVal : '') + '" ',
-                  fSlash = t !== 'select' && t !== 'checkbox-group' ? '/' : '';
+                  fSlash = !multipleField ? '/' : '';
 
               serialStr += '\n\t\t<field ' + fName + fLabel + multiple + roles + desc + (maxLengthVal !== '' ? maxLengthVal !== undefined ? maxLength : '' : '') + required + type + fSlash + '>';
-
-              if (t === 'select' || t === 'checkbox-group') {
+              if (multipleField) {
                 c = 1;
-                $('input[type=text][class=option]', $field).each(function () {
-                  if ($(this).attr('name') !== 'title') {
-                    var selected = $(this).prev().is(':checked') ? ' selected="true"' : '';
-                    serialStr += '\n\t\t\t<option' + selected + '>' + $(this).val() + '</option>';
-                  }
+                $('.sortable-options li', $field).each(function () {
+                  var $option = $(this),
+                      optionValue = 'value="' + $('.option-value', $option).val() + '"',
+                      optionLabel = $('.option-label', $option).val(),
+                      selected = $('.select-option', $option).is(':checked') ? ' selected="true"' : '';
+                  serialStr += '\n\t\t\t<option' + selected + ' ' + optionValue + '>' + optionLabel + '</option>';
                   c++;
                 });
                 serialStr += '\n\t\t</field>';

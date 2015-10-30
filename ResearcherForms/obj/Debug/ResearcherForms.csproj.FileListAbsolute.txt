@@ -217,6 +217,6 @@ D:\Freelance\ResearchForms\ResearcherForms\bin\Microsoft.Owin.Security.OAuth.xml
 D:\Freelance\ResearchForms\ResearcherForms\bin\Microsoft.Owin.Security.Google.xml
 D:\Freelance\ResearchForms\ResearcherForms\bin\Microsoft.Owin.Security.Twitter.xml
 D:\Freelance\ResearchForms\ResearcherForms\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-D:\Freelance\ResearchForms\ResearcherForms\obj\Debug\ResearcherForms.csprojResolveAssemblyReference.cache
 D:\Freelance\ResearchForms\ResearcherForms\obj\Debug\ResearcherForms.dll
 D:\Freelance\ResearchForms\ResearcherForms\obj\Debug\ResearcherForms.pdb
+D:\Freelance\ResearchForms\ResearcherForms\obj\Debug\ResearcherForms.csprojResolveAssemblyReference.cache
