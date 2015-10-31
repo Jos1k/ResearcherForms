@@ -14,9 +14,8 @@ namespace ResearcherForms.BusinessLogic {
 		void RemoveExistingUsersToCourse( string[] userIds, long courseId );
 		void UpdateCourseName( string courseName, long courseId );
 		void AddUserToCourse( long courseId, string userId );
-
 		string CreateFormByJSON( long courseId, string formName, string formBody );
-
 		void RemoveResearchForm( long courseId, long[] formsId );
+		string GetXmlFormByIdByJSON( long formId );
 	}
 }

@@ -84,9 +84,25 @@ namespace ResearcherForms.Controllers {
 		}
 
 		[HttpPost]
-		public ActionResult RemoveResearchForm( long courseId ,long[] formIds ) {
+		public ActionResult RemoveResearchForm( long courseId, long[] formIds ) {
 			_adminManager.RemoveResearchForm( courseId, formIds );
 			return Json( "" );
+		}
+
+
+		[HttpPost]
+		public ActionResult GetAddFormModal() {
+			return PartialView("_AddNewFormModal");
+		}
+
+		[HttpPost]
+		public ActionResult GetExisingFormXML( long formId ) {
+			try {
+				string xmlForm = _adminManager.GetXmlFormByIdByJSON( formId );
+				return Json( xmlForm );
+			} catch( Exception ex ) {
+				return new HttpStatusCodeResult( 500, ex.Message );
+			}
 		}
 	}
 }

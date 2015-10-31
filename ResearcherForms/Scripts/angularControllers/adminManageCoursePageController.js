@@ -107,6 +107,7 @@
         $("#formBuilder").val('');
         $("#frmb-0").empty();
         $scope.formName = '';
+        $scope.formId = '';
         $scope.alertsNewForm = [];
     };
 
@@ -168,8 +169,31 @@
     };
 
 
-    $scope.showAddNewFormModal = function () {
-        $('#myModal').modal('show');
+    $scope.showAddNewFormModal = function (isNewForm, selectedForm) {
+        if (isNewForm == false) {
+            $scope.formName = selectedForm.name,
+            $scope.formId = selectedForm.id
+
+            $http({
+                method: 'POST',
+                url: '/Admin/GetExisingFormXML',
+                headers: { 'Content-Type': 'application/json;' },
+                data: {
+                    'formId': $scope.formId
+                }
+            })
+            .then(function (response) {
+                $('#main_content').html('<form id="" action=""><textarea name="formBuilder" id="formBuilder" cols="30" rows="10"></textarea></form><br style="clear:both">');
+                $("#formBuilder").val(response.data);
+                $("#formBuilder").formBuilder();
+                $('#myModal').modal('show');
+            }, function (response) {
+                return;
+            });
+        }
+        else {
+            $('#myModal').modal('show');
+        }
     };
 
     $scope.selectedUsers = function (fullObjects) {

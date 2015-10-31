@@ -44,7 +44,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">Forms in this course</div>
         <div class="panel-body">
-            <button class="btn btn-success" ng-click="showAddNewFormModal()">Add new</button>
+            <button class="btn btn-success" ng-click="showAddNewFormModal(true,null)">Add new</button>
             <button class="btn btn-danger" ng-click="showRemoveFormsModal()" ng-disabled="selectedForms(false).length==0">Remove</button>
         </div>
         <table class="table">
@@ -61,7 +61,7 @@
                         <input type="checkbox" ng-model="form.isSelected" />
                     </td>
                     <td>
-                        <a href="#" ng-click="gotoManageCoursePage(course.Id)">
+                        <a href="#" ng-click="showAddNewFormModal(false, form)">
                             <i class="fa fa-cog"></i>
                         </a>
                         <a href="#">
@@ -81,4 +81,19 @@
         'use strict';
         $('textarea').formBuilder();
     });
+    //$('#myModal').on('hide.bs.modal', function (e) {
+    //    $("#formBuilder").val('');
+    //    $("#frmb-0").empty();
+    //})
+
+    //$('#myModal').on('shown.bs.modal', function (e) {
+    //    'use strict';
+    //    $('textarea').formBuilder();
+    //    $("#formBuilder").val('');
+    //    $("#frmb-0").empty();
+    //})
+
+
+
+
 </script>

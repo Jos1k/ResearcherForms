@@ -214,7 +214,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="BusinessLogic\AdminManager.cs" />
-    <Compile Include="BusinessLogic\DynamicXml.cs" />
     <Compile Include="BusinessLogic\ParseHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
@@ -329,7 +328,6 @@
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\form-builder-create.js" />
     <Content Include="Scripts\form-builder.js" />
     <Content Include="Scripts\form-builder.min.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-dj.js" />

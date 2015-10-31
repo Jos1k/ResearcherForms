@@ -147,12 +147,14 @@ namespace ResearcherForms.BusinessLogic {
 				throw new Exception( "Form could not be empty!" );
 			}
 
-			List<Field> fields = _formBody.fields.ToList().Select( field =>
+			List<Field> fields = _formBody.fields.ToList().Select( (field, index) =>
 				new Field() {
 					Name = field.name,
 					Description = field.description,
 					FieldType = StaticHelper.ControlTypes[field.type],
 					Label = field.label,
+					Required = field.required,
+					PositionOnForm = index,
 					Options = field.option == null
 					? null
 					: field.option.Select( option =>
@@ -189,6 +191,11 @@ namespace ResearcherForms.BusinessLogic {
 				form => dbContext.ResearchForms.Remove( form ) 
 			);
 			dbContext.SaveChanges();
+		}
+
+		public string GetXmlFormByIdByJSON( long formId ) {
+			ResearchForm form = _dbContext.ResearchForms.Find( formId );
+			return ParseHelper.SerializeResearchFormToXML( form.Fields ) ;
 		}
 	}
 }

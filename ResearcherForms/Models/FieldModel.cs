@@ -15,6 +15,8 @@ namespace ResearcherForms.Models {
 		public string Description { get; set; }
 		public int FieldType { get; set; }
 		public long ResearchFormId { get; set; }
+		public int PositionOnForm { get; set; }
+		public bool Required { get; set; }
 		//[ForeignKey( "ResearchFormId" )]
 		public virtual ResearchForm ResearchForm { get; set; }
 		public virtual ICollection<Option> Options { get; set; }
