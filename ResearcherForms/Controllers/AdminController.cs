@@ -89,12 +89,6 @@ namespace ResearcherForms.Controllers {
 			return Json( "" );
 		}
 
-
-		[HttpPost]
-		public ActionResult GetAddFormModal() {
-			return PartialView("_AddNewFormModal");
-		}
-
 		[HttpPost]
 		public ActionResult GetExisingFormXML( long formId ) {
 			try {
