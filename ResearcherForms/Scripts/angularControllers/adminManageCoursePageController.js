@@ -107,7 +107,7 @@
         $("#formBuilder").val('');
         $("#frmb-0").empty();
         $scope.formName = '';
-        $scope.formId = '';
+        $scope.formId = 0;
         $scope.alertsNewForm = [];
     };
 
@@ -120,23 +120,32 @@
     //&& $("#formBuilder").val().length > 0
 
     $scope.addNewForm = function () {
+        var isNew = $scope.formId == null || $scope.formId == 0;
         if ($("#formBuilder").val().length == 0) {
             $scope.alertsNewForm[0] = { type: 'danger', msg: 'Form should not be empty!' };
             return;
         }
-
         $http({
             method: 'POST',
-            url: '/Admin/AddNewForm',
+            url: '/Admin/AddOrUpdateNewForm',
             headers: { 'Content-Type': 'application/json;' },
             data: {
                 'courseId': $scope.course.id,
                 'formName': $scope.formName,
-                'formBody': $("#formBuilder").val()
+                'formBody': $("#formBuilder").val(),
+                'isNew': isNew,
+                'formId': $scope.formId?$scope.formId:0,
             }
         })
         .then(function (response) {
-            $scope.course.forms.push(JSON.parse(response.data));
+            var resultForm = JSON.parse(response.data);
+            if (isNew == true) {
+                $scope.course.forms.push(resultForm);
+            }
+            else {
+                var formIndex = $scope.getIndexOfArrayByProperty($scope.course.forms, 'id', resultForm.id);
+                $scope.course.forms[formIndex].name = resultForm.name;
+            }
             $scope.formModalCancel();
         }, function (response) {
             $scope.alertsNewForm[0] = { type: 'danger', msg: response.statusText };
@@ -170,6 +179,9 @@
 
 
     $scope.showAddNewFormModal = function (isNewForm, selectedForm) {
+        $("#formBuilder").val('');
+        $("#frmb-0").empty();
+        $scope.alertsNewForm = [];
         if (isNewForm == false) {
             $scope.formName = selectedForm.name,
             $scope.formId = selectedForm.id

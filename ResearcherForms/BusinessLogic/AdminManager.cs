@@ -197,5 +197,74 @@ namespace ResearcherForms.BusinessLogic {
 			ResearchForm form = _dbContext.ResearchForms.Find( formId );
 			return ParseHelper.SerializeResearchFormToXML( form.Fields ) ;
 		}
+
+		public string UpdateFormByJSON( long formId, string formName, string formBody ) {
+			ApplicationDbContext dbContext = new ApplicationDbContext();
+			ResearchForm updateForm = dbContext.ResearchForms.Find( formId );
+			if( formName.Length < 5 || formName.Length > 25 ) {
+				throw new Exception( "Form name should consist at least 5, but not more then 25 letters" );
+			} else if( updateForm.Name.ToLower() != formName.ToLower() 
+				&& _dbContext.ResearchForms.Any( formL =>
+					formL.Name.ToLower() == formName.ToLower()
+				)
+			) {
+				throw new Exception( "Form with such name already exist" );
+			}
+
+			formtemplate _formBody = formBody.ParseXML<formtemplate>();
+
+			if( _formBody.fields == null || _formBody.fields.Count() == 0 ) {
+				throw new Exception( "Form could not be empty!" );
+			}
+
+			List<Field> fields = _formBody.fields.ToList().Select( ( field, index ) =>
+				new Field() {
+					Name = field.name,
+					Description = field.description,
+					FieldType = StaticHelper.ControlTypes[field.type],
+					Label = field.label,
+					Required = field.required,
+					PositionOnForm = index,
+					Options = field.option == null
+					? null
+					: field.option.Select( option =>
+						new Option() {
+							Name = option.Value,
+							Value = option.value
+						}
+					)
+					.ToList()
+				}
+			).ToList();
+
+			List<string> fielsIdsList = fields.Select( field => field.Name ).ToList();
+			List<Field> removedList = updateForm.Fields.Where( field => !fielsIdsList.Contains( field.Name ) ).ToList();
+			foreach( Field field in removedList ) {
+				//updateForm.Fields.Remove( field );
+				dbContext.Fields.Remove( field );
+			}
+			dbContext.SaveChanges();
+
+			foreach (Field field in fields){
+				Field exisitingField = updateForm.Fields.SingleOrDefault( extField => extField.Name == field.Name );
+				if( exisitingField == null ) {
+					updateForm.Fields.Add( field );
+				} else {
+					exisitingField.Description = field.Description;
+					exisitingField.Label = field.Label;
+					exisitingField.Required = field.Required;
+					exisitingField.PositionOnForm = field.PositionOnForm;
+					if( field.Options != null && field.Options.Count > 1 ) {
+
+					}
+					exisitingField.Options = field.Options;
+				}
+			};
+
+			updateForm.Name = formName;
+			dbContext.SaveChanges();
+			
+			return JsonConvert.SerializeObject( new { id = updateForm.Id, name = updateForm.Name } );
+		}
 	}
 }

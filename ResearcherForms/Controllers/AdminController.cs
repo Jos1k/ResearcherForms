@@ -74,10 +74,15 @@ namespace ResearcherForms.Controllers {
 		}
 
 		[HttpPost]
-		public ActionResult AddNewForm( long courseId, string formName, string formBody ) {
+		public ActionResult AddOrUpdateNewForm( long courseId, string formName, string formBody , long formId, bool isNew) {
 			try {
-				string newForm = _adminManager.CreateFormByJSON( courseId, formName, formBody );
-				return Json( newForm );
+				string form = "";
+				if( isNew ) {
+					form = _adminManager.CreateFormByJSON( courseId, formName, formBody );
+				} else {
+					form = _adminManager.UpdateFormByJSON( formId, formName, formBody );
+				}
+				return Json( form );
 			} catch( Exception ex ) {
 				return new HttpStatusCodeResult( 500, ex.Message );
 			}
