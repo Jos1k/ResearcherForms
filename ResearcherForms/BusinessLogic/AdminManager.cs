@@ -147,7 +147,7 @@ namespace ResearcherForms.BusinessLogic {
 				throw new Exception( "Form could not be empty!" );
 			}
 
-			List<Field> fields = _formBody.fields.ToList().Select( (field, index) =>
+			List<Field> fields = _formBody.fields.ToList().Select( ( field, index ) =>
 				new Field() {
 					Name = field.name,
 					Description = field.description,
@@ -183,19 +183,19 @@ namespace ResearcherForms.BusinessLogic {
 
 			ApplicationDbContext dbContext = new ApplicationDbContext();
 			Course course = dbContext.Courses.Find( courseId );
-			List<ResearchForm> forms = course.Forms.Where( 
-				form => formsId.Contains( form.Id ) 
+			List<ResearchForm> forms = course.Forms.Where(
+				form => formsId.Contains( form.Id )
 			).ToList();
 
 			forms.ForEach(
-				form => dbContext.ResearchForms.Remove( form ) 
+				form => dbContext.ResearchForms.Remove( form )
 			);
 			dbContext.SaveChanges();
 		}
 
 		public string GetXmlFormByIdByJSON( long formId ) {
 			ResearchForm form = _dbContext.ResearchForms.Find( formId );
-			return ParseHelper.SerializeResearchFormToXML( form.Fields ) ;
+			return ParseHelper.SerializeResearchFormToXML( form.Fields );
 		}
 
 		public string UpdateFormByJSON( long formId, string formName, string formBody ) {
@@ -203,7 +203,7 @@ namespace ResearcherForms.BusinessLogic {
 			ResearchForm updateForm = dbContext.ResearchForms.Find( formId );
 			if( formName.Length < 5 || formName.Length > 25 ) {
 				throw new Exception( "Form name should consist at least 5, but not more then 25 letters" );
-			} else if( updateForm.Name.ToLower() != formName.ToLower() 
+			} else if( updateForm.Name.ToLower() != formName.ToLower()
 				&& _dbContext.ResearchForms.Any( formL =>
 					formL.Name.ToLower() == formName.ToLower()
 				)
@@ -239,13 +239,9 @@ namespace ResearcherForms.BusinessLogic {
 
 			List<string> fielsIdsList = fields.Select( field => field.Name ).ToList();
 			List<Field> removedList = updateForm.Fields.Where( field => !fielsIdsList.Contains( field.Name ) ).ToList();
-			foreach( Field field in removedList ) {
-				//updateForm.Fields.Remove( field );
-				dbContext.Fields.Remove( field );
-			}
-			dbContext.SaveChanges();
+			dbContext.Fields.RemoveRange( removedList );
 
-			foreach (Field field in fields){
+			foreach( Field field in fields ) {
 				Field exisitingField = updateForm.Fields.SingleOrDefault( extField => extField.Name == field.Name );
 				if( exisitingField == null ) {
 					updateForm.Fields.Add( field );
@@ -254,16 +250,40 @@ namespace ResearcherForms.BusinessLogic {
 					exisitingField.Label = field.Label;
 					exisitingField.Required = field.Required;
 					exisitingField.PositionOnForm = field.PositionOnForm;
-					if( field.Options != null && field.Options.Count > 1 ) {
-
+					if( exisitingField.Options != null && exisitingField.Options.Count > 1 ) {
+						List<string> options = field.Options.Select( option => option.Name ).ToList();
+						List<Option> removedOptions = exisitingField.Options.Where( option =>
+							!field.Options.Any(
+								newOption =>
+									newOption.Name == option.Name
+							)
+						).ToList();
+						dbContext.Options.RemoveRange( removedOptions );
+						List<Option> existingOptions = exisitingField.Options.Where( option => options.Contains( option.Name ) ).ToList();
+						existingOptions.ForEach( existingOption =>
+							existingOption.Value = field.Options.Single(
+								newOption => newOption.Name == existingOption.Name
+							).Value
+						);
+						List<Option> newOptions = field.Options.Where( option =>
+							!existingOptions.Any(
+								existingOption => existingOption.Name == option.Name
+							)
+						).ToList();
+						foreach( Option option in newOptions ) {
+							if( !existingOptions.Any( x => x.Name == option.Name ) ) {
+								exisitingField.Options.Add( option );
+							} else {
+								throw new Exception( "There are could not be 2 options with same name!" );
+							}
+						};
 					}
-					exisitingField.Options = field.Options;
 				}
 			};
 
 			updateForm.Name = formName;
 			dbContext.SaveChanges();
-			
+
 			return JsonConvert.SerializeObject( new { id = updateForm.Id, name = updateForm.Name } );
 		}
 	}
