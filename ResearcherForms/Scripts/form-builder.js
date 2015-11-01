@@ -729,8 +729,8 @@ Author: Kevin Chappell <kevin.b.chappell@gmail.com>
       var label = $(field).find('input[name="label"]').val() !== '' ? $(field).find('input[name="label"]').val() : title;
 
       var li = '',
-          delBtn = '<a id="del_' + lastID + '" class="del-button btn delete-confirm" href="#" title="' + opts.messages.removeMessage + '">' + opts.messages.remove + '</a>',
-          toggleBtn = '<a id="frm-' + lastID + '" class="toggle-form btn icon-pencil" href="#" title="' + opts.messages.hide + '"></a> ',
+          delBtn = '<a id="del_' + lastID + '" class="del-button delete-confirm" href="#" title="' + opts.messages.removeMessage + '"><i class="fa fa-times" style="color: black;"></i></a>',
+          toggleBtn = '<a id="frm-' + lastID + '" class="toggle-form" href="#" style="padding-left: 10px;" title="' + opts.messages.hide + '"><i class="fa fa-pencil" style="color: black;"></i></a> ',
           required = values.required,
           tooltip = values.description !== '' ? '<span class="tooltip-element" tooltip="' + values.description + '">?</span>' : '';
 

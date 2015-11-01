@@ -225,3 +225,4 @@ D:\Freelance\ResearchForms\ResearcherForms\bin\YAXLib.xml
 E:\Development\ResearcherFormsGit\ResearcherForms\bin\YAXLib.dll
 E:\Development\ResearcherFormsGit\ResearcherForms\bin\YAXLib.pdb
 E:\Development\ResearcherFormsGit\ResearcherForms\bin\YAXLib.xml
+E:\Development\ResearcherFormsGit\ResearcherForms\obj\Debug\ResearcherForms.csprojResolveAssemblyReference.cache
