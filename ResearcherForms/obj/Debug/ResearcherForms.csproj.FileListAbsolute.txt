@@ -135,7 +135,6 @@ E:\Development\ResearcherFormsGit\ResearcherForms\bin\Microsoft.Owin.Security.Tw
 E:\Development\ResearcherFormsGit\ResearcherForms\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 E:\Development\ResearcherFormsGit\ResearcherForms\obj\Debug\ResearcherForms.dll
 E:\Development\ResearcherFormsGit\ResearcherForms\obj\Debug\ResearcherForms.pdb
-E:\Development\ResearcherFormsGit\ResearcherForms\obj\Debug\ResearcherForms.csprojResolveAssemblyReference.cache
 E:\Development\ResearcherFormsGit\ResearcherForms\bin\Ninject.dll
 E:\Development\ResearcherFormsGit\ResearcherForms\bin\Ninject.Web.Common.dll
 E:\Development\ResearcherFormsGit\ResearcherForms\bin\Ninject.Web.Mvc.dll
