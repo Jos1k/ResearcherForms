@@ -1,5 +1,9 @@
 ﻿var adminManageCoursePageController = function ($scope, $http, $window, $uibModal) {
 
+    $('#myModal').on('hidden.bs.modal', function (e) {
+        $scope.formModalCancel();
+    });
+
     $scope.alertsNewForm = [];
     $scope.showAddExisitingUserModal = function () {
         $http({
@@ -103,7 +107,6 @@
 
 
     $scope.formModalCancel = function () {
-        $('#myModal').modal('hide');
         $("#formBuilder").val('');
         $("#frmb-0").empty();
         $scope.formName = '';
@@ -146,7 +149,7 @@
                 var formIndex = $scope.getIndexOfArrayByProperty($scope.course.forms, 'id', resultForm.id);
                 $scope.course.forms[formIndex].name = resultForm.name;
             }
-            $scope.formModalCancel();
+            $('#myModal').modal('hide');
         }, function (response) {
             $scope.alertsNewForm[0] = { type: 'danger', msg: response.statusText };
         });
