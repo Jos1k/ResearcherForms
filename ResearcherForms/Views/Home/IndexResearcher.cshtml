@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Admin Panel";
+}
+
+<div class="row" ng-controller="adminPageController" ng-cloak>
+    <div ng-init="courses = @ViewBag.CourseList" />
+    <div ng-init="basicUrl = '@ViewBag.BasicUrl'" />
+
+    <h3>Courses:</h3>
+    <div class="row">
+        <div class="col-md-6">
+            <input ng-model="search.Name" id="search-course" class="form-control" type="text" placeholder="Type course name to search">
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th class="col-md-10">Name</th>
+                <th class="col-md-2" style="text-align:center">Forms Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="course in courses | filter:search:strict" style="cursor: pointer;">
+                <td>
+                    {{course.Name}}
+                </td>
+                <td style="text-align:center">
+                    {{course.FormsCount}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

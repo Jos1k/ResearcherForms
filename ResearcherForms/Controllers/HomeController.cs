@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using ResearcherForms.BusinessLogic;
 using ResearcherForms.Models;
 
@@ -27,6 +28,14 @@ namespace ResearcherForms.Controllers {
 			return View();
 		}
 
+		[Authorize( Roles = StaticHelper.RoleNames.Researcher )]
+		public ActionResult IndexResearcher() {
+			string currentUserId = User.Identity.GetUserId();
+			ViewBag.CourseList = _adminManager.GetAllCoursesForResearcherByJSON( currentUserId );
+			ViewBag.BasicUrl = string.Format( "{0}://{1}:{2}", this.Request.Url.Scheme, this.Request.Url.Host, this.Request.Url.Port );
+			return View( "~/Views/Home/IndexResearcher.cshtml" );
+		}
+
 		[Authorize( Roles = StaticHelper.RoleNames.Admin )]
 		public ActionResult IndexAdmin() {
 			ViewBag.CourseList = _adminManager.GetAllCoursesByJSON();
@@ -34,11 +43,6 @@ namespace ResearcherForms.Controllers {
 			ViewBag.BasicUrl = string.Format( "{0}://{1}:{2}", this.Request.Url.Scheme, this.Request.Url.Host, this.Request.Url.Port );
 			ViewBag.RemoveCourseModalTemplate = StaticHelper.RenderPartialViewToString( this, "_RemoveCourseModal", null );
 			return View( "~/Views/Home/IndexAdmin.cshtml" );
-		}
-
-		[Authorize( Roles = StaticHelper.RoleNames.Researcher )]
-		public ActionResult IndexResearcher() {
-			throw new NotImplementedException();
 		}
 	}
 }

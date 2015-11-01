@@ -18,7 +18,7 @@ namespace ResearcherForms.BusinessLogic {
 		void RemoveResearchForm( long courseId, long[] formsId );
 		string GetXmlFormByIdByJSON( long formId );
 		string UpdateFormByJSON( long formId, string formName, string formBody );
-
 		void RemoveCourse( long courseId );
+		string GetAllCoursesForResearcherByJSON( string researcherId);
 	}
 }

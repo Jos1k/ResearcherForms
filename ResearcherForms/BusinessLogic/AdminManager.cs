@@ -294,9 +294,21 @@ namespace ResearcherForms.BusinessLogic {
 			Course course = dbContext.Courses.Find( courseId );
 			dbContext.ResearchForms.RemoveRange( course.Forms );
 			dbContext.SaveChanges();
-			
+
 			dbContext.Courses.Remove( course );
 			dbContext.SaveChanges();
+		}
+
+		public string GetAllCoursesForResearcherByJSON( string researcherId ) {
+			ApplicationUser researcher = _dbContext.Users.Find( researcherId );
+			var shortCourses = researcher.Courses.ToList().Select( course => new {
+				Id = course.Id,
+				Name = course.Name,
+				ClassListCount = course.ClassList.Count(),
+				FormsCount = course.Forms.Count()
+			}
+		);
+			return JsonConvert.SerializeObject( shortCourses );
 		}
 	}
 }

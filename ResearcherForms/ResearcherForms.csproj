@@ -1119,6 +1119,7 @@
     <Content Include="Views\Admin\_AddNewFormModal.cshtml" />
     <Content Include="Views\Admin\_RemoveFormModal.cshtml" />
     <Content Include="Views\Home\_RemoveCourseModal.cshtml" />
+    <Content Include="Views\Home\IndexResearcher.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
