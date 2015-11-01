@@ -1133,6 +1133,7 @@
     <Content Include="Views\Admin\_AddNewUserModal.cshtml" />
     <Content Include="Views\Admin\_AddNewFormModal.cshtml" />
     <Content Include="Views\Admin\_RemoveFormModal.cshtml" />
+    <Content Include="Views\Home\_RemoveCourseModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

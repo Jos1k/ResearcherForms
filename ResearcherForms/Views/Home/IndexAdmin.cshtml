@@ -6,6 +6,8 @@
     <div ng-init="courses = @ViewBag.CourseList" />
     <div ng-init="basicUrl = '@ViewBag.BasicUrl'" />
     <div ng-init="createCourseModalTemplate = '@ViewBag.CreateCourseModalTemplate'" />
+    <div ng-init="removeCourseModalTemplate = '@ViewBag.RemoveCourseModalTemplate'" />
+    
 
     <h3>Courses:</h3>
     <div class="row">
@@ -44,7 +46,7 @@
                     <a href="#" ng-click="gotoManageCoursePage(course.Id)">
                         <i class="fa fa-cogs"></i>
                     </a>
-                    <a href="#">
+                    <a href="#" ng-click="showRemoveCourseModal(course.Id)">
                         <i class="fa fa-times"></i>
                     </a>
                 </td>

@@ -64,6 +64,12 @@ namespace ResearcherForms.Controllers {
 		}
 
 		[HttpPost]
+		public ActionResult RemoveCourse( long courseId ) {
+			_adminManager.RemoveCourse( courseId );
+			return Json( "" );
+		}
+
+		[HttpPost]
 		public ActionResult UpdateCourseName( string courseName, long courseId ) {
 			try {
 				_adminManager.UpdateCourseName( courseName, courseId );

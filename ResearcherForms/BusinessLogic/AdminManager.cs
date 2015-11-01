@@ -136,9 +136,10 @@ namespace ResearcherForms.BusinessLogic {
 				throw new Exception( "Form name should consist at least 5, but not more then 25 letters" );
 			} else if( _dbContext.ResearchForms.Any( formL =>
 						  formL.Name.ToLower() == formName.ToLower()
+						  && formL.ResearchCourseId == courseId
 					  )
 				  ) {
-				throw new Exception( "Form with such name already exist" );
+				throw new Exception( "Form with such name already exist in this course!" );
 			}
 
 			formtemplate _formBody = formBody.ParseXML<formtemplate>();
@@ -206,6 +207,7 @@ namespace ResearcherForms.BusinessLogic {
 			} else if( updateForm.Name.ToLower() != formName.ToLower()
 				&& _dbContext.ResearchForms.Any( formL =>
 					formL.Name.ToLower() == formName.ToLower()
+					&& formL.ResearchCourseId == updateForm.ResearchCourseId
 				)
 			) {
 				throw new Exception( "Form with such name already exist" );
@@ -285,6 +287,16 @@ namespace ResearcherForms.BusinessLogic {
 			dbContext.SaveChanges();
 
 			return JsonConvert.SerializeObject( new { id = updateForm.Id, name = updateForm.Name } );
+		}
+
+		public void RemoveCourse( long courseId ) {
+			ApplicationDbContext dbContext = new ApplicationDbContext();
+			Course course = dbContext.Courses.Find( courseId );
+			dbContext.ResearchForms.RemoveRange( course.Forms );
+			dbContext.SaveChanges();
+			
+			dbContext.Courses.Remove( course );
+			dbContext.SaveChanges();
 		}
 	}
 }
