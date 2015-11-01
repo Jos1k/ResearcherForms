@@ -113,6 +113,9 @@
         $scope.formId = 0;
         $scope.alertsNewForm = [];
     };
+    $scope.hideModal = function () {
+        $('#myModal').modal('hide');
+    };
 
     $scope.validationOnNewFormModalIsDisabled = function () {
         if ($scope.formName && $scope.formName.length > 5) {
@@ -137,7 +140,7 @@
                 'formName': $scope.formName,
                 'formBody': $("#formBuilder").val(),
                 'isNew': isNew,
-                'formId': $scope.formId?$scope.formId:0,
+                'formId': $scope.formId ? $scope.formId : 0,
             }
         })
         .then(function (response) {
