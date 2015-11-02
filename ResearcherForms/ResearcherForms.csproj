@@ -301,6 +301,7 @@
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\angularControllers\adminAddExisitingUsersPageModalController.js" />
+    <Content Include="Scripts\angularControllers\researcherEmptyFormPageModal.js" />
     <Content Include="Scripts\angularControllers\adminAddNewUserPageModalController.js" />
     <Content Include="Scripts\angularControllers\researcherPageController.js" />
     <Content Include="Scripts\angularControllers\researcherManageFormsInCoursePageController.js" />
@@ -1126,6 +1127,7 @@
     <Content Include="Views\Home\_RemoveCourseModal.cshtml" />
     <Content Include="Views\Home\IndexResearcher.cshtml" />
     <Content Include="Views\Researcher\ResearcherCourseForms.cshtml" />
+    <Content Include="Views\Researcher\_ResearcherFormModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

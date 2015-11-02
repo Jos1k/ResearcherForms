@@ -16,21 +16,14 @@ namespace ResearcherForms.Controllers {
 			_researcherManager = researcherManager;
 		}
 
-		//public ActionResult CreateCourse( string name ) {
-		//	try {
-		//		long courseId = _adminManager.CreateCourse( name );
-		//		UrlHelper u = new UrlHelper( this.ControllerContext.RequestContext );
-		//		string url = u.Action( "GetCourseInfo", "Admin", new { courseId = courseId }, this.Request.Url.Scheme );
-		//		return Json( url );
-		//	} catch( Exception ex ) {
-		//		return new HttpStatusCodeResult( 500, ex.Message );
-		//	}
-		//}
-
 		public ActionResult GetCourseForms( long courseId ) {
 			string courseForResearcher = _researcherManager.GetCourseByIdByJSON( courseId );
 			ViewBag.Course = courseForResearcher;
 			return View( "~/Views/Researcher/ResearcherCourseForms.cshtml" );
+		}
+
+		public ActionResult GetEmptyFormForResearcher( long formId ) {
+			return PartialView("~/Views/Researcher/_ResearcherFormModal.cshtml", formId);
 		}
 	}
 }
