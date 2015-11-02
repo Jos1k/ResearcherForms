@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Researcher Course";
+}
+<div class="row" id="manageForm" ng-controller="researcherManageFormsInCoursePageController" ng-cloak>
+    <div ng-init="course = @ViewBag.Course" />
+    <h3>Course: {{course.name}}</h3>
+    <div class="panel panel-default">
+        <div class="panel-heading">Forms in this course</div>
+	    <div class="panel-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <input ng-model="search.name" id="search-form" class="form-control" type="text" placeholder="Type form name to search">
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+		    <table class="table">
+			    <thead>
+				    <tr>
+					    <th class="col-md-1">Actions</th>
+					    <th class="col-md-10">Name</th>
+				    </tr>
+			    </thead>
+			    <tbody>
+				    <tr ng-repeat="form in course.forms | filter:search:strict">
+					    <td>
+						    <a href="#">
+							    <i class="fa fa-plus-circle"></i>
+						    </a>
+						    <a href="#">
+							    <i class="fa fa-eye"></i>
+						    </a>
+					    </td>
+					    <td>
+						    {{form.name}}
+					    </td>
+				    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+    </div>
+</div>

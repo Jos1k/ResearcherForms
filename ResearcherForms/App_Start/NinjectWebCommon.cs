@@ -46,6 +46,7 @@ namespace ResearcherForms.App_Start
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
 				kernel.Bind<ApplicationDbContext>().ToSelf().InRequestScope();
 				kernel.Bind<IAdminManager>().To<AdminManager>();
+				kernel.Bind<IResearcherManager>().To<ResearcherManager>();
 
                 RegisterServices(kernel);
                 return kernel;

@@ -142,6 +142,10 @@ E:\Development\ResearcherFormsGit\ResearcherForms\bin\WebActivatorEx.dll
 E:\Development\ResearcherFormsGit\ResearcherForms\bin\Ninject.xml
 E:\Development\ResearcherFormsGit\ResearcherForms\bin\Ninject.Web.Common.xml
 E:\Development\ResearcherFormsGit\ResearcherForms\bin\Ninject.Web.Mvc.xml
+E:\Development\ResearcherFormsGit\ResearcherForms\bin\YAXLib.dll
+E:\Development\ResearcherFormsGit\ResearcherForms\bin\YAXLib.pdb
+E:\Development\ResearcherFormsGit\ResearcherForms\bin\YAXLib.xml
+E:\Development\ResearcherFormsGit\ResearcherForms\obj\Debug\ResearcherForms.csprojResolveAssemblyReference.cache
 D:\Freelance\ResearchForms\ResearcherForms\bin\ApplicationInsights.config
 D:\Freelance\ResearchForms\ResearcherForms\bin\ResearcherForms.dll.config
 D:\Freelance\ResearchForms\ResearcherForms\bin\ResearcherForms.dll
@@ -184,6 +188,7 @@ D:\Freelance\ResearchForms\ResearcherForms\bin\System.Web.WebPages.dll
 D:\Freelance\ResearchForms\ResearcherForms\bin\System.Web.WebPages.Razor.dll
 D:\Freelance\ResearchForms\ResearcherForms\bin\WebActivatorEx.dll
 D:\Freelance\ResearchForms\ResearcherForms\bin\WebGrease.dll
+D:\Freelance\ResearchForms\ResearcherForms\bin\YAXLib.dll
 D:\Freelance\ResearchForms\ResearcherForms\bin\Microsoft.AI.DependencyCollector.xml
 D:\Freelance\ResearchForms\ResearcherForms\bin\Microsoft.AI.ServerTelemetryChannel.xml
 D:\Freelance\ResearchForms\ResearcherForms\bin\Microsoft.AI.Web.xml
@@ -202,6 +207,8 @@ D:\Freelance\ResearchForms\ResearcherForms\bin\System.Web.WebPages.xml
 D:\Freelance\ResearchForms\ResearcherForms\bin\System.Web.WebPages.Deployment.xml
 D:\Freelance\ResearchForms\ResearcherForms\bin\System.Web.WebPages.Razor.xml
 D:\Freelance\ResearchForms\ResearcherForms\bin\Antlr3.Runtime.pdb
+D:\Freelance\ResearchForms\ResearcherForms\bin\YAXLib.pdb
+D:\Freelance\ResearchForms\ResearcherForms\bin\YAXLib.xml
 D:\Freelance\ResearchForms\ResearcherForms\bin\EntityFramework.xml
 D:\Freelance\ResearchForms\ResearcherForms\bin\EntityFramework.SqlServer.xml
 D:\Freelance\ResearchForms\ResearcherForms\bin\Microsoft.AspNet.Identity.Core.xml
@@ -219,10 +226,3 @@ D:\Freelance\ResearchForms\ResearcherForms\bin\Microsoft.Owin.Security.Microsoft
 D:\Freelance\ResearchForms\ResearcherForms\obj\Debug\ResearcherForms.dll
 D:\Freelance\ResearchForms\ResearcherForms\obj\Debug\ResearcherForms.pdb
 D:\Freelance\ResearchForms\ResearcherForms\obj\Debug\ResearcherForms.csprojResolveAssemblyReference.cache
-D:\Freelance\ResearchForms\ResearcherForms\bin\YAXLib.dll
-D:\Freelance\ResearchForms\ResearcherForms\bin\YAXLib.pdb
-D:\Freelance\ResearchForms\ResearcherForms\bin\YAXLib.xml
-E:\Development\ResearcherFormsGit\ResearcherForms\bin\YAXLib.dll
-E:\Development\ResearcherFormsGit\ResearcherForms\bin\YAXLib.pdb
-E:\Development\ResearcherFormsGit\ResearcherForms\bin\YAXLib.xml
-E:\Development\ResearcherFormsGit\ResearcherForms\obj\Debug\ResearcherForms.csprojResolveAssemblyReference.cache

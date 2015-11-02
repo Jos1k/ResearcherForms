@@ -1,11 +1,9 @@
 ﻿@{
-    ViewBag.Title = "Admin Panel";
+    ViewBag.Title = "Researcher Panel";
 }
-
-<div class="row" ng-controller="adminPageController" ng-cloak>
+<div class="row" ng-controller="researcherPageController" ng-cloak>
     <div ng-init="courses = @ViewBag.CourseList" />
     <div ng-init="basicUrl = '@ViewBag.BasicUrl'" />
-
     <h3>Courses:</h3>
     <div class="row">
         <div class="col-md-6">
@@ -13,7 +11,6 @@
         </div>
         <div class="col-md-4"></div>
     </div>
-
     <table class="table table-hover">
         <thead>
             <tr>
@@ -22,7 +19,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="course in courses | filter:search:strict" style="cursor: pointer;">
+            <tr ng-repeat="course in courses | filter:search:strict" style="cursor: pointer;" ng-click="gotoManageCoursePage(course.Id)">
                 <td>
                     {{course.Name}}
                 </td>

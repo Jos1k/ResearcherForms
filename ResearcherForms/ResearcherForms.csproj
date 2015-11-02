@@ -213,9 +213,12 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="BusinessLogic\ResearcherManager.cs" />
     <Compile Include="BusinessLogic\AdminManager.cs" />
+    <Compile Include="BusinessLogic\IResearcherManager.cs" />
     <Compile Include="BusinessLogic\ParseHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ResearcherController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="BusinessLogic\IAdminManager.cs" />
@@ -299,6 +302,8 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\angularControllers\adminAddExisitingUsersPageModalController.js" />
     <Content Include="Scripts\angularControllers\adminAddNewUserPageModalController.js" />
+    <Content Include="Scripts\angularControllers\researcherPageController.js" />
+    <Content Include="Scripts\angularControllers\researcherManageFormsInCoursePageController.js" />
     <Content Include="Scripts\angularControllers\adminRemoveExisitingFormsPageModalController.js" />
     <Content Include="Scripts\angularControllers\adminRemoveExisitingUsersPageModalController.js" />
     <Content Include="Scripts\angularControllers\adminManageCoursePageController.js" />
@@ -1120,10 +1125,10 @@
     <Content Include="Views\Admin\_RemoveFormModal.cshtml" />
     <Content Include="Views\Home\_RemoveCourseModal.cshtml" />
     <Content Include="Views\Home\IndexResearcher.cshtml" />
+    <Content Include="Views\Researcher\ResearcherCourseForms.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Researcher\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

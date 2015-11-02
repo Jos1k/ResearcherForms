@@ -11,6 +11,7 @@ namespace ResearcherForms.Models {
 		[DatabaseGeneratedAttribute( DatabaseGeneratedOption.Identity )]
 		public long Id { get; set; }
 		public string UserId { get; set; }
+		public DateTime DateCreating { get; set; }
 		//[ForeignKey( "UserId" )]
 		public virtual ApplicationUser User { get; set; }
 		public long ResearchFormId { get; set; }
