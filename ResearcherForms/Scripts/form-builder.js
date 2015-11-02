@@ -40,7 +40,6 @@ Author: Kevin Chappell <kevin.b.chappell@gmail.com>
       messages: {
         add: 'Add Item',
         allowSelect: 'Allow Select',
-        autocomplete: 'Autocomplete',
         cannotBeEmpty: 'This field cannot be empty',
         checkboxGroup: 'Checkbox Group',
         checkbox: 'Checkbox',
@@ -336,13 +335,6 @@ Author: Kevin Chappell <kevin.b.chappell@gmail.com>
         type: 'date',
         className: 'calendar',
         name: 'date-input'
-      }
-    }, {
-      label: opts.messages.autocomplete,
-      attrs: {
-        type: 'autocomplete',
-        className: 'autocomplete',
-        name: 'autocomplete'
       }
     }];
 
@@ -655,7 +647,7 @@ Author: Kevin Chappell <kevin.b.chappell@gmail.com>
         // 'textarea': appendTextarea(values),
         '2': appendTextInput,
         'date': appendTextInput,
-        'autocomplete': appendTextInput,
+
         'checkbox': appendCheckbox,
         'select': appendSelectList,
         'rich-text': appendTextarea,
@@ -716,7 +708,7 @@ Author: Kevin Chappell <kevin.b.chappell@gmail.com>
       advFields += '</div></div>';
 
       // if field type is not checkbox, checkbox/radio group or select list, add max length
-      if ($.inArray(values.type, ['checkbox', 'select', 'checkbox-group', 'date', 'autocomplete', 'radio-group']) < 0) {
+      if ($.inArray(values.type, ['checkbox', 'select', 'checkbox-group', 'date', 'radio-group']) < 0) {
         advFields += '<div class="frm-fld"><label class="max-length-label">' + opts.messages.maxLength + '</label>';
         advFields += '<input type="text" name="max-length" max-length="4" value="' + (values.maxLength !== undefined ? values.maxLength : '') + '" class="fld-max-length" id="max-length-' + lastID + '" /></div>';
       }
@@ -798,9 +790,7 @@ Author: Kevin Chappell <kevin.b.chappell@gmail.com>
         case 'checkbox':
           preview = '<input type="' + attrs.type + '" placeholder="">';
           break;
-        case 'autocomplete':
-          preview = '<input class="ui-autocomplete-input" autocomplete="on" placeholder="">';
-          break;
+
         default:
           preview = '<' + attrs.type + '></' + attrs.type + '>';
       }
