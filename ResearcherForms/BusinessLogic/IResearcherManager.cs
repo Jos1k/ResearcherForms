@@ -7,5 +7,6 @@ using ResearcherForms.Models;
 namespace ResearcherForms.BusinessLogic {
 	public interface IResearcherManager {
 		string GetCourseByIdByJSON( long courseId );
+		string GetFormModelByJSON( long formId );
 	}
 }

@@ -23,6 +23,7 @@ namespace ResearcherForms.Controllers {
 		}
 
 		public ActionResult GetEmptyFormForResearcher( long formId ) {
+			ViewBag.FormModel = _researcherManager.GetFormModelByJSON(formId);
 			return PartialView("~/Views/Researcher/_ResearcherFormModal.cshtml", formId);
 		}
 	}
