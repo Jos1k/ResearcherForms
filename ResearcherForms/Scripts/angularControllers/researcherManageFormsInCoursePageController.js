@@ -6,7 +6,7 @@
             animation: true,
             templateUrl: '/Researcher/GetEmptyFormForResearcher/?formId=' + formId,
             controller: 'researcherEmptyFormPageModal',
-            //size: "editCompany",
+            size: "newFormModal",
             //resolve: {
             //    researchers: function () {
             //        return $scope.selectedUsers(false);
@@ -25,6 +25,8 @@
         //});
         //$uibModalInstance.close();
     };
+    
+
     
     $scope.getIndexOfArrayByProperty = function findWithAttr(array, attr, value) {
         for (var i = 0; i < array.length; i += 1) {

@@ -19,6 +19,9 @@
 .modal-createCourse {
 width:400px;
 }
+.modal-newFormModal {
+	width:500px;
+}
 .modal-addForm .modal-content {
 	width: 1000px;
 	min-height: 500px;
@@ -76,4 +79,8 @@ ul.frmb {
 
 .frmb-control li {
 	background-color: #EDEDED !important;
+}
+
+.radio,.checkbox {
+	     padding-left: 0; 
 }
