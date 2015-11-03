@@ -1,43 +1,59 @@
 ﻿var researcherEmptyFormPageModal = function ($scope, $location, $uibModalInstance, $window, $http) {
-    $scope.alerts = [];
-    //$scope.ok = function () {
-    //    if ($scope.userPassword != $scope.userPasswordConfirm) {
-    //        $scope.alerts[0] = { type: 'danger', msg: 'Passwords are not equal' };
-    //        return;
-    //    }
+    $scope.alertsFormModal = [];
+    $scope.ok = function () {
 
-    //    $http({
-    //        method: 'POST',
-    //        url: '/Account/CreateNewUserOnCourse',
-    //        headers: { 'Content-Type': 'application/json;' },
-    //        data: {
-    //            'userName': $scope.userName,
-    //            'userEmail': $scope.userEmail,
-    //            'userPassword': $scope.userPassword,
-    //            'courseId': $scope.courseId
-    //        }
-    //    }).
-    //    then(function (response) {
-    //        $uibModalInstance.close({ 'id': response.data, 'name': $scope.userName });
-    //    }, function (response) {
-    //        $scope.alerts[0] = { type: 'danger', msg: response.statusText };
-    //    });
-    //};
+        formFieldsData = [];
+        for (var i = 0; i < $scope.formModel.fields.length; i += 1) {
+            var fieldData = {
+                fieldId: $scope.formModel.fields[i].id,
+                fieldData: $scope.formModel.fields[i].dataValue,
+                fieldType:$scope.formModel.fields[i].fieldType,
+                options: $scope.getOptionsFromField($scope.formModel.fields[i])
+            }
+            formFieldsData.push(fieldData);
+        }
+
+        var formModel = {
+            formId: $scope.formModel.formId,
+            fieldsData: formFieldsData
+        }
+
+        $http({
+            method: 'POST',
+            url: '/Researcher/FillNewForm',
+            headers: { 'Content-Type': 'application/json;' },
+            data: {
+                'formModel': JSON.stringify(formModel)
+            }
+        })
+        .then(function (response) {
+            $window.location.href = $scope.basicUrl + '/Researcher/GetFormHistory/?formId=' + $scope.formModel.formId;
+        }, function (response) {
+            $scope.alertsFormModal[0] = { type: 'danger', msg: response.statusText };
+        });
+
+    };
 
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
     };
 
-    //$scope.isAllFieldsNotEmpty = function () {
-    //    if ($scope.userName
-    //        && $scope.userEmail
-    //        && $scope.userPassword
-    //        && $scope.userPasswordConfirm
-    //    ) {
-    //        return false;
-    //    }
-    //    else {
-    //        return true;
-    //    }
-    //}
+    $scope.getOptionsFromField = function (field) {
+        if (field.fieldType == 'checkbox-group') {
+            var options = [];
+            for (var i = 0; i < field.options.length; i += 1) {
+                var option = {
+                    optionId: field.options[i].id,
+                    value: field.options[i].isSelected || field.options[i].isSelected == false
+                        ? false
+                        : true
+                };
+                options.push(option)
+            }
+            return options;
+        }
+        else {
+            return null;
+        }
+    }
 };

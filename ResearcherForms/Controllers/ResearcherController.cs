@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using ResearcherForms.BusinessLogic;
 using ResearcherForms.Models;
+using Microsoft.AspNet.Identity;
 
 namespace ResearcherForms.Controllers {
 
@@ -26,5 +27,19 @@ namespace ResearcherForms.Controllers {
 			ViewBag.FormModel = _researcherManager.GetFormModelByJSON(formId);
 			return PartialView("~/Views/Researcher/_ResearcherFormModal.cshtml", formId);
 		}
+
+		public ActionResult FillNewForm( string formModel ) {
+			try {
+				_researcherManager.FillNewForm( formModel, User.Identity.GetUserId() );
+				return Json("");
+			} catch( Exception ex ) {
+				return new HttpStatusCodeResult( 500, ex.Message );
+			}
+		}
+
+		public ActionResult GetFormHistory(long formId) {
+			return Json( "" );
+		}
+
 	}
 }

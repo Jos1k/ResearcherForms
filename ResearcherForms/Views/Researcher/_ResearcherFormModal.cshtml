@@ -7,24 +7,24 @@
         <div ng-init="formId = @Model" />
         <div ng-init="formModel = @ViewBag.FormModel"></div>
         @*<div ng-init="initValidationOnForm()" />*@
-        <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}">{{alert.msg}}</uib-alert>
+        <uib-alert ng-repeat="alert in alertsFormModal" type="{{alert.type}}">{{alert.msg}}</uib-alert>
         <div class="container">
             <div ng-repeat="field in formModel.fields">
                 <div ng-switch on="field.fieldType">
                     <div class="form-group row" ng-switch-when="date">
                         <label for="{{field.name}}" class="control-label"> {{field.label}}</label><br>
-                        <input type="date" id="{{field.name}}" name="{{field.name}}">
+                        <input type="date" id="{{field.name}}" name="{{field.name}}" ng-model="field.dataValue" placeholder="yyyy-MM-dd" min="0001-01-01">
                     </div>
                     <div class="checkbox form-group row" ng-switch-when="checkbox">
                         <label for="{{field.name}}" class="control-label" name="{{field.name}}" style="font-weight:bold">
-                            <input type="checkbox"> {{field.label}}
+                            <input type="checkbox" ng-model="field.dataValue"> {{field.label}}
                         </label><br>
                     </div>
                     <div class="form-group row" ng-switch-when="checkbox-group">
                         <label for="{{field.name}}" class="control-label"> {{field.label}}</label><br>
                         <div ng-repeat="option in field.options" class="checkbox">
                             <label for="{{field.name}}" class="control-label" name="{{field.name}}">
-                                <input type="checkbox" value="{{option.value}}" name="{{field.name}}"> {{option.name}}
+                                <input type="checkbox" ng-model="option.isSelected" value="{{option.value}}" name="{{field.name}}"> {{option.name}}
                             </label>
                         </div>
                     </div>
@@ -32,24 +32,24 @@
                         <label for="{{field.name}}" class="control-label"> {{field.label}}</label><br>
                         <div ng-repeat="option in field.options" class="radio">
                             <label for="{{field.name}}" class="control-label" name="{{field.name}}">
-                                <input type="radio" value="{{option.value}}" name="{{field.name}}">
+                                <input type="radio" ng-model="field.dataValue" ng-value="{{option.id}}" name="{{field.name}}">
                                 {{option.name}}
                             </label>
                         </div>
                     </div>
                     <div class="form-group row" ng-switch-when="rich-text">
                         <label for="{{field.name}}" class="control-label"> {{field.label}}</label><br>
-                        <textarea style="resize:vertical" rows="2" class="form-control" cols="10" name="{{field.name}}" id="{{field.name}}"></textarea>
+                        <textarea style="resize:vertical" rows="2" class="form-control" cols="10" name="{{field.name}}" id="{{field.name}}" ng-model="field.dataValue"></textarea>
                     </div>
                     <div class="form-group row" ng-switch-when="select">
                         <label for="{{field.name}}" class="control-label"> {{field.label}}</label><br>
-                        <select>
-                            <option ng-repeat="option in field.options" value="{{option.value}}"> {{option.name}}</option>
+                        <select ng-model="field.dataValue">
+                            <option ng-repeat="option in field.options" value="{{option.id}}"> {{option.name}}</option>
                         </select>
                     </div>
                     <div class="form-group row" ng-switch-when="text">
                         <label for="{{field.name}}" class="control-label"> {{field.label}}</label><br>
-                        <input type="text" class="form-control" name="{{field.name}}" id="{{field.name}}">
+                        <input type="text" class="form-control" name="{{field.name}}" id="{{field.name}}" ng-model="field.dataValue">
                     </div>
                 </div>
             </div>
@@ -59,7 +59,7 @@
         <button type="button" class="btn btn-danger" ng-click="cancel()">
             Cancel
         </button>
-        <button type="button" class="btn btn-success" @*ng-click="ok()" ng-disabled="isAllFieldsNotEmpty()"*@>
+        <button type="button" class="btn btn-success" ng-click="ok()" @*ng-disabled="isAllFieldsNotEmpty()"*@>
             OK
         </button>
     </div>

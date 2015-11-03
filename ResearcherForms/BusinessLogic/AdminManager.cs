@@ -292,9 +292,11 @@ namespace ResearcherForms.BusinessLogic {
 		public void RemoveCourse( long courseId ) {
 			ApplicationDbContext dbContext = new ApplicationDbContext();
 			Course course = dbContext.Courses.Find( courseId );
-			dbContext.ResearchForms.RemoveRange( course.Forms );
-			dbContext.SaveChanges();
-
+			if( course.Forms != null && course.Forms.Count > 0 ) {
+				dbContext.ResearchForms.RemoveRange( course.Forms );
+				dbContext.SaveChanges();
+			}
+			
 			dbContext.Courses.Remove( course );
 			dbContext.SaveChanges();
 		}

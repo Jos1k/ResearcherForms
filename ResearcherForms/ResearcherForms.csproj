@@ -230,6 +230,7 @@
     <Compile Include="Models\CourseModel.cs" />
     <Compile Include="Models\FieldDataModel.cs" />
     <Compile Include="Models\FieldModel.cs" />
+    <Compile Include="Models\FormsXMLModels\FormFieldJSONModel.cs" />
     <Compile Include="Models\FormsXMLModels\FormModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
