@@ -45,10 +45,11 @@
                         <div class="panel-body" style="background-color:#D7D7D7;">
                             <div id="formHistoryData">
                                 <div class="container">
-                                    <div ng-show="$scope.isFormActivitySelected">
-                                        Click On Research Activity To View
-                                    </div>
-                                    <div ng-repeat="field in form.formModel.fields" ng-hide="$scope.isFormActivitySelected">
+									<div ng-hide="isFormActivitySelected" style="height:150px; text-align:center">
+										<br><br><br>
+                                        <h5>Click On Activity To View Research Result</h5>
+									</div>
+                                    <div ng-repeat="field in form.formModel.fields" ng-show="isFormActivitySelected">
                                         <div ng-switch on="field.fieldType">
                                             <div class="form-group row" ng-switch-when="date">
                                                 <label for="{{field.name}}" class="control-label"> {{field.label}}</label><br>
