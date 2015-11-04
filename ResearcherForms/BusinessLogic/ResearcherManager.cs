@@ -70,14 +70,14 @@ namespace ResearcherForms.BusinessLogic {
 			formFieldData.fieldsData
 			.Where( fieldData => fieldData.options != null )
 			.ToList()
-			.ForEach( fieldData => fieldsWithOptions.AddRange(fieldData.options.ToList()) );
+			.ForEach( fieldData => fieldsWithOptions.AddRange( fieldData.options.ToList() ) );
 
 			fieldsAndOptions.AddRange(
 				fieldsWithOptions.Select( option =>
 					new FieldData() {
 						FormFieldId = option.optionId,
 						IsOption = true,
-						Value = ((bool)option.value).ToString()
+						Value = ( (bool)option.value ).ToString()
 					}
 				).ToList()
 			);
@@ -94,15 +94,30 @@ namespace ResearcherForms.BusinessLogic {
 			_dbContext.SaveChanges();
 		}
 
+		public string GetFormActivityByJSON( long formId ) {
+			ResearchForm form = _dbContext.ResearchForms.Find( formId );
+			var shortForm = new {
+				name = form.Name,
+				id = form.Id,
+				courseId = form.ResearchCourseId,
+				formActivity = form.UserFormsFieldData.Select( formFIeldData => new {
+					formFieldDate = formFIeldData.DateCreating,
+					formFieldId = formFIeldData.Id,
+					formFieldNumber = formFIeldData.ResearchNumber
+				} )
+			};
+			return JsonConvert.SerializeObject( shortForm );
+		}
+
 		private string GetStringDataFromObject( string fieldType, object value ) {
-			 switch( fieldType ) {
-				case "date": return ( (DateTime)value).ToString();
-				case "checkbox": return value == null ? "false" : ( (bool)value).ToString();
+			switch( fieldType ) {
+				case "date": return ( (DateTime)value ).ToString();
+				case "checkbox": return value == null ? "false" : ( (bool)value ).ToString();
 				case "checkbox-group": return null;
-				case "radio-group": return ((long) value).ToString();
+				case "radio-group": return ( (long)value ).ToString();
 				case "rich-text": return ( value as string );
 				case "select": return ( value as string );
-				case "text": return (value as string);
+				case "text": return ( value as string );
 				default: return value.ToString();
 			}
 		}

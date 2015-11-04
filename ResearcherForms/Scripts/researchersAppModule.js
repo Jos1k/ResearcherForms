@@ -10,3 +10,4 @@ researchersAppModule.controller('adminRemoveExisitingFormsPageModalController', 
 researchersAppModule.controller('researcherPageController', researcherPageController);
 researchersAppModule.controller('researcherManageFormsInCoursePageController', researcherManageFormsInCoursePageController);
 researchersAppModule.controller('researcherEmptyFormPageModal', researcherEmptyFormPageModal);
+researchersAppModule.controller('researcherManageFormActivityPageController', researcherManageFormActivityPageController);

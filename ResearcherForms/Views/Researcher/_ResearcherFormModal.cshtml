@@ -5,7 +5,8 @@
     </div>
     <div class="modal-body">
         <div ng-init="formId = @Model" />
-        <div ng-init="formModel = @ViewBag.FormModel"></div>
+		<div ng-init="formModel = @ViewBag.FormModel"></div>
+        <div ng-init="basicUrl = '@ViewBag.BasicUrl'" />
         @*<div ng-init="initValidationOnForm()" />*@
         <uib-alert ng-repeat="alert in alertsFormModal" type="{{alert.type}}">{{alert.msg}}</uib-alert>
         <div class="container">

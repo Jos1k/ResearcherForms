@@ -7,7 +7,7 @@
             var fieldData = {
                 fieldId: $scope.formModel.fields[i].id,
                 fieldData: $scope.formModel.fields[i].dataValue,
-                fieldType:$scope.formModel.fields[i].fieldType,
+                fieldType: $scope.formModel.fields[i].fieldType,
                 options: $scope.getOptionsFromField($scope.formModel.fields[i])
             }
             formFieldsData.push(fieldData);

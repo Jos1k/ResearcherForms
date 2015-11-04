@@ -2,7 +2,8 @@
     ViewBag.Title = "Researcher Course";
 }
 <div class="row" id="manageForm" ng-controller="researcherManageFormsInCoursePageController" ng-cloak>
-    <div ng-init="course = @ViewBag.Course" />
+	<div ng-init="course = @ViewBag.Course" />
+    <div ng-init="basicUrl = '@ViewBag.BasicUrl'" />
     <h3>Course: {{course.name}}</h3>
     <div class="panel panel-default">
         <div class="panel-heading">Forms in this course</div>
@@ -13,29 +14,26 @@
                 </div>
                 <div class="col-md-4"></div>
             </div>
-		    <table class="table">
-			    <thead>
-				    <tr>
-					    <th class="col-md-1">Actions</th>
-					    <th class="col-md-10">Name</th>
-				    </tr>
-			    </thead>
-			    <tbody>
-				    <tr ng-repeat="form in course.forms | filter:search:strict">
-					    <td>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th class="col-md-1" style="text-align:center;">Actions</th>
+                        <th class="col-md-11">Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="form in course.forms | filter:search:strict">
+						<td style="text-align:center;">
                             <a href="#" ng-click="showResearcherEmptyFormModal(form.id)">
-                                <i class="fa fa-plus-circle"></i>
+                                <i class="fa fa-plus-circle fa-lg"></i>
                             </a>
-						    <a href="#">
-							    <i class="fa fa-eye"></i>
-						    </a>
-					    </td>
-					    <td>
-						    {{form.name}}
-					    </td>
-				    </tr>
-			    </tbody>
-		    </table>
+                        </td>
+                        <td style="cursor: pointer;" ng-click="gotoManageFormActivity(form.id)">
+                            {{form.name}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
 	    </div>
     </div>
 </div>

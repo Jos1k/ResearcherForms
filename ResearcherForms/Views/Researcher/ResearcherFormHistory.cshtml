@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Form History";
+}
+<script type="text/javascript" src="@Url.Content("/Scripts/date.format.js")"></script>
+<div class="row" id="manageForm" ng-controller="researcherManageFormActivityPageController" ng-cloak>
+    <div ng-init="form = @ViewBag.Form" />
+    <div ng-init="basicUrl = '@ViewBag.BasicUrl'" />
+    <h3>Form: {{form.name}}</h3>
+    <div class="panel panel-default">
+		<div class="panel-heading">
+			<div class="row">
+                <div class="col-md-8">
+                    Form activity
+                </div>
+				<div class="col-md-4" style="text-align:right">
+                    <button class="btn btn-warning" ng-click="goBackToFormsInCourse(form.courseId)"> Back to Forms</button>
+                    <button class="btn btn-primary"> Add new research</button>
+                </div>
+			</div>
+		</div>
+        <div class="panel-body">
+            <div class="row">
+				<div class="col-md-7">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th class="col-md-1">#</th>
+								<th class="col-md-10">Date</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="formHistory in form.formActivity" style="cursor: pointer;" @*ng-click="gotoManageCoursePage(course.Id)"*@>
+								<td>
+									{{formHistory.formFieldNumber}}
+								</td>
+								<td>
+									{{getDateInString(formHistory.formFieldDate)}}
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+                <div class="col-md-5">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

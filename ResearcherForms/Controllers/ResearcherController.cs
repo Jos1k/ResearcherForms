@@ -20,11 +20,13 @@ namespace ResearcherForms.Controllers {
 		public ActionResult GetCourseForms( long courseId ) {
 			string courseForResearcher = _researcherManager.GetCourseByIdByJSON( courseId );
 			ViewBag.Course = courseForResearcher;
+			ViewBag.BasicUrl = string.Format( "{0}://{1}:{2}", this.Request.Url.Scheme, this.Request.Url.Host, this.Request.Url.Port );
 			return View( "~/Views/Researcher/ResearcherCourseForms.cshtml" );
 		}
 
 		public ActionResult GetEmptyFormForResearcher( long formId ) {
 			ViewBag.FormModel = _researcherManager.GetFormModelByJSON(formId);
+			ViewBag.BasicUrl = string.Format( "{0}://{1}:{2}", this.Request.Url.Scheme, this.Request.Url.Host, this.Request.Url.Port );
 			return PartialView("~/Views/Researcher/_ResearcherFormModal.cshtml", formId);
 		}
 
@@ -38,7 +40,9 @@ namespace ResearcherForms.Controllers {
 		}
 
 		public ActionResult GetFormHistory(long formId) {
-			return Json( "" );
+			ViewBag.Form = _researcherManager.GetFormActivityByJSON( formId );
+			ViewBag.BasicUrl = string.Format( "{0}://{1}:{2}", this.Request.Url.Scheme, this.Request.Url.Host, this.Request.Url.Port );
+			return View( "~/Views/Researcher/ResearcherFormHistory.cshtml" );
 		}
 
 	}
