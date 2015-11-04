@@ -11,6 +11,6 @@ namespace ResearcherForms.BusinessLogic {
 
 		void FillNewForm( string formModel, string userId );
 		string GetFormActivityByJSON( long formId );
-
+		string GetFormFieldDataByJSON( long formFieldId );
 	}
 }

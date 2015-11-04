@@ -45,5 +45,14 @@ namespace ResearcherForms.Controllers {
 			return View( "~/Views/Researcher/ResearcherFormHistory.cshtml" );
 		}
 
+		public ActionResult GetFormFieldHistory( long formFieldId ) {
+			try {
+				string formFieldData = _researcherManager.GetFormFieldDataByJSON( formFieldId );
+				return Json( formFieldData );
+			} catch( Exception ex ) {
+				return new HttpStatusCodeResult( 500, ex.Message );
+			}
+		}
+
 	}
 }

@@ -110,6 +110,10 @@ namespace ResearcherForms.BusinessLogic {
 			return JsonConvert.SerializeObject( shortForm );
 		}
 
+		public string GetFormFieldDataByJSON( long formFieldId ) {
+			throw new NotImplementedException();
+		}
+
 		private string GetStringDataFromObject( string fieldType, object value ) {
 			switch( fieldType ) {
 				case "date": return ( (DateTime)value ).ToString();

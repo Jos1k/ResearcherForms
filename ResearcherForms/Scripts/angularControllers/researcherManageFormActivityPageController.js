@@ -24,20 +24,21 @@
     };
     
     $scope.getFormWithData = function (formFieldId) {
+
         $scope.isFormActivitySelected = true;
-        // $http({
-        //     method: 'POST',
-        //     url: '/Researcher/GetFormHistory',
-        //     headers: { 'Content-Type': 'application/json;' },
-        //     data: {
-        //         'formModel': JSON.stringify(formModel)
-        //     }
-        // })
-        //.then(function (response) {
-        //    $window.location.href = $scope.basicUrl + '/Researcher/GetFormHistory/?formId=' + $scope.formModel.formId;
-        //}, function (response) {
-        //    $scope.alertsFormModal[0] = { type: 'danger', msg: response.statusText };
-        //});
+         $http({
+             method: 'POST',
+             url: '/Researcher/GetFormFieldHistory',
+             headers: { 'Content-Type': 'application/json;' },
+             data: {
+                 'formFieldId': formFieldId
+             }
+         })
+        .then(function (response) {
+            
+        }, function (response) {
+            $scope.isFormActivitySelected = false;
+        });
     };
 
     $scope.getIndexOfArrayByProperty = function findWithAttr(array, attr, value) {
