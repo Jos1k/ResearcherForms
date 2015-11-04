@@ -104,7 +104,8 @@ namespace ResearcherForms.BusinessLogic {
 					formFieldDate = formFIeldData.DateCreating,
 					formFieldId = formFIeldData.Id,
 					formFieldNumber = formFIeldData.ResearchNumber
-				} )
+				} ),
+				formModel = JsonConvert.DeserializeObject( GetFormModelByJSON( formId ) ) 
 			};
 			return JsonConvert.SerializeObject( shortForm );
 		}

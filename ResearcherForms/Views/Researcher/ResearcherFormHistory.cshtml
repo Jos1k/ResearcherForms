@@ -7,41 +7,95 @@
     <div ng-init="basicUrl = '@ViewBag.BasicUrl'" />
     <h3>Form: {{form.name}}</h3>
     <div class="panel panel-default">
-		<div class="panel-heading">
-			<div class="row">
+        <div class="panel-heading">
+            <div class="row">
                 <div class="col-md-8">
                     Form activity
                 </div>
-				<div class="col-md-4" style="text-align:right">
+                <div class="col-md-4" style="text-align:right">
                     <button class="btn btn-warning" ng-click="goBackToFormsInCourse(form.courseId)"> Back to Forms</button>
                     <button class="btn btn-primary"> Add new research</button>
                 </div>
-			</div>
-		</div>
+            </div>
+        </div>
         <div class="panel-body">
             <div class="row">
-				<div class="col-md-7">
-					<table class="table table-hover">
-						<thead>
-							<tr>
-								<th class="col-md-1">#</th>
-								<th class="col-md-10">Date</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr ng-repeat="formHistory in form.formActivity" style="cursor: pointer;" @*ng-click="gotoManageCoursePage(course.Id)"*@>
-								<td>
-									{{formHistory.formFieldNumber}}
-								</td>
-								<td>
-									{{getDateInString(formHistory.formFieldDate)}}
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+                <div class="col-md-7">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th class="col-md-1">#</th>
+                                <th class="col-md-10">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="formHistory in form.formActivity" style="cursor: pointer;" ng-click="getFormWithData(formHistory.formFieldId)">
+                                <td>
+                                    {{formHistory.formFieldNumber}}
+                                </td>
+                                <td>
+                                    {{getDateInString(formHistory.formFieldDate)}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 <div class="col-md-5">
-
+                    <div class="panel panel-default" style="margin-top:34px;">
+                        <div class="panel-body" style="background-color:#D7D7D7;">
+                            <div id="formHistoryData">
+                                <div class="container">
+                                    <div ng-show="$scope.isFormActivitySelected">
+                                        Click On Research Activity To View
+                                    </div>
+                                    <div ng-repeat="field in form.formModel.fields" ng-hide="$scope.isFormActivitySelected">
+                                        <div ng-switch on="field.fieldType">
+                                            <div class="form-group row" ng-switch-when="date">
+                                                <label for="{{field.name}}" class="control-label"> {{field.label}}</label><br>
+                                                <input disabled type="date" id="{{field.name}}" name="{{field.name}}" ng-model="field.dataValue" placeholder="yyyy-MM-dd" min="0001-01-01">
+                                            </div>
+                                            <div class="checkbox form-group row" ng-switch-when="checkbox">
+                                                <label for="{{field.name}}" class="control-label" name="{{field.name}}" style="font-weight:bold">
+                                                    <input disabled type="checkbox" ng-model="field.dataValue"> {{field.label}}
+                                                </label><br>
+                                            </div>
+                                            <div class="form-group row" ng-switch-when="checkbox-group">
+                                                <label for="{{field.name}}" class="control-label"> {{field.label}}</label><br>
+                                                <div ng-repeat="option in field.options" class="checkbox">
+                                                    <label for="{{field.name}}" class="control-label" name="{{field.name}}">
+                                                        <input disabled type="checkbox" ng-model="option.isSelected" value="{{option.value}}" name="{{field.name}}"> {{option.name}}
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row" ng-switch-when="radio-group">
+                                                <label for="{{field.name}}" class="control-label"> {{field.label}}</label><br>
+                                                <div ng-repeat="option in field.options" class="radio">
+                                                    <label for="{{field.name}}" class="control-label" name="{{field.name}}">
+                                                        <input disabled type="radio" ng-model="field.dataValue" ng-value="{{option.id}}" name="{{field.name}}">
+                                                        {{option.name}}
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row" ng-switch-when="rich-text">
+                                                <label for="{{field.name}}" class="control-label"> {{field.label}}</label><br>
+                                                <textarea disabled style="resize:vertical" rows="2" class="form-control" cols="10" name="{{field.name}}" id="{{field.name}}" ng-model="field.dataValue"></textarea>
+                                            </div>
+                                            <div class="form-group row" ng-switch-when="select">
+                                                <label for="{{field.name}}" class="control-label"> {{field.label}}</label><br>
+                                                <select disabled ng-model="field.dataValue" style="background-color:#D7D7D7">
+                                                    <option ng-repeat="option in field.options" value="{{option.id}}"> {{option.name}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group row" ng-switch-when="text">
+                                                <label for="{{field.name}}" class="control-label"> {{field.label}}</label><br>
+                                                <input disabled type="text" class="form-control" name="{{field.name}}" id="{{field.name}}" ng-model="field.dataValue">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

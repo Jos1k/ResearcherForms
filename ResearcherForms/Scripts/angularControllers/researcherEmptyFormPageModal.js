@@ -16,7 +16,7 @@
         var formModel = {
             formId: $scope.formModel.formId,
             fieldsData: formFieldsData
-        }
+        };
 
         $http({
             method: 'POST',
