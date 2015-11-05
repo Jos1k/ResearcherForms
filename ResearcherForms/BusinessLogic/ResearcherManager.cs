@@ -100,18 +100,28 @@ namespace ResearcherForms.BusinessLogic {
 				name = form.Name,
 				id = form.Id,
 				courseId = form.ResearchCourseId,
-				formActivity = form.UserFormsFieldData.Select( formFIeldData => new {
+				formActivity = form.UserFormsFieldData
+					.OrderByDescending( formFIeldData => formFIeldData.ResearchNumber ) 
+					.Select( formFIeldData => new {
 					formFieldDate = formFIeldData.DateCreating,
 					formFieldId = formFIeldData.Id,
 					formFieldNumber = formFIeldData.ResearchNumber
 				} ),
-				formModel = JsonConvert.DeserializeObject( GetFormModelByJSON( formId ) ) 
+				formModel = JsonConvert.DeserializeObject( GetFormModelByJSON( formId ) )
 			};
 			return JsonConvert.SerializeObject( shortForm );
 		}
 
 		public string GetFormFieldDataByJSON( long formFieldId ) {
-			throw new NotImplementedException();
+			List<FieldData> formFieldDataOptions = _dbContext.UserFormsFieldData.Find( formFieldId ).Options.ToList();
+			var shortFormFieldData = formFieldDataOptions.Select( fieldData =>
+				new {
+					value = fieldData.Value,
+					fieldId = fieldData.FormFieldId,
+					isOption = fieldData.IsOption
+				}
+			).ToList();
+			return JsonConvert.SerializeObject( shortFormFieldData );
 		}
 
 		private string GetStringDataFromObject( string fieldType, object value ) {
