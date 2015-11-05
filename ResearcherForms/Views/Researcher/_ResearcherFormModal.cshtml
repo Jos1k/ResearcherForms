@@ -14,7 +14,12 @@
                 <div ng-switch on="field.fieldType">
                     <div class="form-group row" ng-switch-when="date">
                         <label for="{{field.name}}" class="control-label"> {{field.label}}</label><br>
-                        <input type="date" id="{{field.name}}" name="{{field.name}}" ng-model="field.dataValue" placeholder="yyyy-MM-dd" min="0001-01-01">
+                        <div class='input-group date' id='{{field.name}}'>
+                            <input type='text' class="form-control" ng-model="field.dataValue" data-date-time-picker />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
                     </div>
                     <div class="checkbox form-group row" ng-switch-when="checkbox">
                         <label for="{{field.name}}" class="control-label" name="{{field.name}}" style="font-weight:bold">

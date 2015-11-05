@@ -40,15 +40,15 @@
                var fielValueId = $scope.getIndexOfArrayByProperty(fieldDataValues, 'fieldId', $scope.form.formModel.fields[i].id);
 
                if ($scope.form.formModel.fields[i].fieldType == 'date') {
-                   if (fielValueId) {
-                       $scope.form.formModel.fields[i].dataValue = Date.parse(fieldDataValues[fielValueId].value);
+                   if (typeof fielValueId != 'undefined') {
+                       $scope.form.formModel.fields[i].dataValue = new Date(fieldDataValues[fielValueId].value);
                    }
                    else {
                        $scope.form.formModel.fields[i].dataValue = null;
                    }
                }
                if ($scope.form.formModel.fields[i].fieldType == 'checkbox') {
-                   if (fielValueId) {
+                   if (typeof fielValueId != 'undefined') {
                        $scope.form.formModel.fields[i].dataValue = fieldDataValues[fielValueId].value.toLowerCase() == "true" ? true : false;
                    }
                    else {
@@ -67,7 +67,7 @@
                    }
                }
                else {
-                   if (fielValueId) {
+                   if (typeof fielValueId != 'undefined') {
                        $scope.form.formModel.fields[i].dataValue = fieldDataValues[fielValueId].value;
                    }
                    else {
