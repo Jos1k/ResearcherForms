@@ -23,7 +23,7 @@ var dateTimePicker = function () {
                 showTodayButton: true
             });
             dtp.on("dp.change", function (e) {
-                ngModelCtrl.$setViewValue(moment(e.date).format("LL"));
+                ngModelCtrl.$setViewValue(moment(e.date).format("dddd, MMMM Do YYYY, h:mm:ss a"));
                 scope.$apply();
             });
         }
