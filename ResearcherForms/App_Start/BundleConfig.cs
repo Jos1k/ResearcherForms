@@ -21,7 +21,8 @@ namespace ResearcherForms {
 			bundles.Add( new ScriptBundle( "~/bundles/bootstrap" ).Include(
 					  "~/Scripts/bootstrap.js",
 					  "~/Scripts/respond.js",
-					  "~/Scripts/ui-bootstrap-tpls-0.14.3.min.js" ) );
+					  "~/Scripts/ui-bootstrap-tpls-0.14.3.min.js",
+					  "~/Scripts/moment.min.js" ) );
 
 			bundles.Add( new StyleBundle( "~/Content/css" ).Include(
 					  "~/Content/bootstrap.css",

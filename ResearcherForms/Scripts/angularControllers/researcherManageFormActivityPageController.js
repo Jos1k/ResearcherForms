@@ -6,7 +6,7 @@
     //};
 
     $scope.getDateInString = function (fieldFormDate) {
-        var dateString = dateFormat(fieldFormDate, "dddd, mmmm dS, yyyy");
+        var dateString = moment(fieldFormDate).format("dddd, MMMM Do YYYY, h:mm:ss a");
         return dateString;
     };
 

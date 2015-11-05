@@ -1,7 +1,10 @@
 ﻿@{
     ViewBag.Title = "Form History";
 }
-<script type="text/javascript" src="@Url.Content("/Scripts/date.format.js")"></script>
+<link rel="stylesheet" type="text/css" href="@Url.Content( "~/Content/bootstrap-datetimepicker.css" )" />
+<script src="@Url.Content( "~/Scripts/Moment.js" )"></script>
+<script src="@Url.Content( "~/Scripts/bootstrap-datetimepicker.min.js" )"></script>
+
 <div class="row" id="manageForm" ng-controller="researcherManageFormActivityPageController" ng-cloak>
     <div ng-init="form = @ViewBag.Form" />
     <div ng-init="basicUrl = '@ViewBag.BasicUrl'" />
