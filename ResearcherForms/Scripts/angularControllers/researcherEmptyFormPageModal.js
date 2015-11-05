@@ -1,5 +1,14 @@
 ﻿var researcherEmptyFormPageModal = function ($scope, $location, $uibModalInstance, $window, $http) {
     $scope.alertsFormModal = [];
+
+    $scope.initDateTimePicker = function () {
+            $('#datetimepicker1').datetimepicker();
+    }
+
+    //$uibModalInstance.opened.then(function () {
+    //    $('#datetimepicker1').datetimepicker();
+    //});
+
     $scope.ok = function () {
 
         formFieldsData = [];

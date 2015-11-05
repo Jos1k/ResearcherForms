@@ -7,14 +7,13 @@
         <div ng-init="formId = @Model" />
 		<div ng-init="formModel = @ViewBag.FormModel"></div>
         <div ng-init="basicUrl = '@ViewBag.BasicUrl'" />
-        @*<div ng-init="initValidationOnForm()" />*@
         <uib-alert ng-repeat="alert in alertsFormModal" type="{{alert.type}}">{{alert.msg}}</uib-alert>
         <div class="container">
             <div ng-repeat="field in formModel.fields">
                 <div ng-switch on="field.fieldType">
                     <div class="form-group row" ng-switch-when="date">
                         <label for="{{field.name}}" class="control-label"> {{field.label}}</label><br>
-                        <div class='input-group date' id='{{field.name}}'>
+                        <div class='input-group date' id='datetimepicker1' ng-init="initDateTimePicker()">
                             <input type='text' class="form-control" ng-model="field.dataValue" data-date-time-picker />
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>

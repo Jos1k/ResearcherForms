@@ -53,7 +53,12 @@
                                         <div ng-switch on="field.fieldType">
                                             <div class="form-group row" ng-switch-when="date">
                                                 <label for="{{field.name}}" class="control-label"> {{field.label}}</label><br>
-                                                <input disabled type="date" id="{{field.name}}" name="{{field.name}}" ng-model="field.dataValue" placeholder="yyyy-MM-dd" min="0001-01-01">
+                                                <div class='input-group date' id='datetimepicker1' ng-init="initDateTimePicker()">
+                                                    <input type='text' class="form-control" ng-model="field.dataValue" data-date-time-picker  disabled/>
+                                                    <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                    </span>
+                                                </div>
                                             </div>
                                             <div class="checkbox form-group row" ng-switch-when="checkbox">
                                                 <label for="{{field.name}}" class="control-label" name="{{field.name}}" style="font-weight:bold">

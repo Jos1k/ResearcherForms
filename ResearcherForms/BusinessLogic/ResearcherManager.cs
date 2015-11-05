@@ -126,7 +126,7 @@ namespace ResearcherForms.BusinessLogic {
 
 		private string GetStringDataFromObject( string fieldType, object value ) {
 			switch( fieldType ) {
-				case "date": return ( (DateTime)value ).ToString();
+				case "date": return ( value as string );
 				case "checkbox": return value == null ? "false" : ( (bool)value ).ToString();
 				case "checkbox-group": return null;
 				case "radio-group": return ( (long)value ).ToString();
