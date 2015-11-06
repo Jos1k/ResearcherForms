@@ -1,4 +1,6 @@
-﻿var researcherEmptyFormPageModal = function ($scope, $location, $uibModalInstance, $window, $http) {
+﻿var researcherEmptyFormPageModal = function ($scope, $location, $uibModalInstance, $window, $http, isGotoAfter) {
+
+    $scope.isGotoAfter = isGotoAfter;
     $scope.alertsFormModal = [];
 
     $scope.initDateTimePicker = function () {
@@ -45,7 +47,12 @@
             }
         })
         .then(function (response) {
-            $window.location.href = $scope.basicUrl + '/Researcher/GetFormHistory/?formId=' + $scope.formModel.formId;
+            if ($scope.isGotoAfter == true) {
+                $window.location.href = $scope.basicUrl + '/Researcher/GetFormHistory/?formId=' + $scope.formModel.formId;
+            }
+            else {
+                $uibModalInstance.close(response.data);
+            }
         }, function (response) {
             $scope.alertsFormModal[0] = { type: 'danger', msg: response.statusText };
         });

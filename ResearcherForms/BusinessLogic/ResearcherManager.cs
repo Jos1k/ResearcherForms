@@ -56,7 +56,9 @@ namespace ResearcherForms.BusinessLogic {
 			};
 			return JsonConvert.SerializeObject( shortForm );
 		}
-		public void FillNewForm( string formModel, string userId ) {
+
+
+		public string FillNewForm( string formModel, string userId ) {
 			formFieldJSONModel formFieldData = JsonConvert.DeserializeObject<formFieldJSONModel>( formModel );
 
 			List<FieldData> fieldsAndOptions = formFieldData.fieldsData.Select( fieldData =>
@@ -94,6 +96,14 @@ namespace ResearcherForms.BusinessLogic {
 
 			_dbContext.ResearchForms.Find( formFieldData.formId ).UserFormsFieldData.Add( userFormFieldData );
 			_dbContext.SaveChanges();
+
+			var shortFormFieldData = new {
+				formFieldDate = userFormFieldData.DateCreating,
+				formFieldId = userFormFieldData.Id,
+				formFieldNumber = userFormFieldData.ResearchNumber
+			};
+
+			return JsonConvert.SerializeObject( shortFormFieldData );
 		}
 
 		public string GetFormActivityByJSON( long formId ) {
@@ -103,12 +113,12 @@ namespace ResearcherForms.BusinessLogic {
 				id = form.Id,
 				courseId = form.ResearchCourseId,
 				formActivity = form.UserFormsFieldData
-					.OrderByDescending( formFIeldData => formFIeldData.ResearchNumber ) 
+					.OrderByDescending( formFIeldData => formFIeldData.ResearchNumber )
 					.Select( formFIeldData => new {
-					formFieldDate = formFIeldData.DateCreating,
-					formFieldId = formFIeldData.Id,
-					formFieldNumber = formFIeldData.ResearchNumber
-				} ),
+						formFieldDate = formFIeldData.DateCreating,
+						formFieldId = formFIeldData.Id,
+						formFieldNumber = formFIeldData.ResearchNumber
+					} ),
 				formModel = JsonConvert.DeserializeObject( GetFormModelByJSON( formId ) )
 			};
 			return JsonConvert.SerializeObject( shortForm );
@@ -131,11 +141,11 @@ namespace ResearcherForms.BusinessLogic {
 				case "date": return ( value as string );
 				case "checkbox": return string.IsNullOrEmpty(
 					value.ToString()
-					) 
-					? "false" 
+					)
+					? "false"
 					: ( (bool)value ).ToString();
 				case "checkbox-group": return null;
-				case "radio-group": return ( (long)value ).ToString();
+				case "radio-group": return (value is long) ? ( (long) value ).ToString() : "";
 				case "rich-text": return ( value as string );
 				case "select": return ( value as string );
 				case "text": return ( value as string );

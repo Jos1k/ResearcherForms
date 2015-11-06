@@ -32,8 +32,8 @@ namespace ResearcherForms.Controllers {
 
 		public ActionResult FillNewForm( string formModel ) {
 			try {
-				_researcherManager.FillNewForm( formModel, User.Identity.GetUserId() );
-				return Json("");
+				string newFormFieldData = _researcherManager.FillNewForm( formModel, User.Identity.GetUserId() );
+				return Json( newFormFieldData );
 			} catch( Exception ex ) {
 				return new HttpStatusCodeResult( 500, ex.Message );
 			}

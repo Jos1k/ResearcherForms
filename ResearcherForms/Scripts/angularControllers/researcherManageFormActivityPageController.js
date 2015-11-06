@@ -16,6 +16,17 @@
             templateUrl: '/Researcher/GetEmptyFormForResearcher/?formId=' + formId,
             controller: 'researcherEmptyFormPageModal',
             size: "newFormModal",
+            resolve: {
+                isGotoAfter:false
+            }
+        });
+
+        modalInstance.result.then(function (newFormActivity) {
+            $scope.form.formActivity.splice(0, 0, JSON.parse(newFormActivity));
+
+            modalInstance.close();
+        }, function (response) {
+            //$window.alert(response.statusText);
         });
     };
 

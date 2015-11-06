@@ -7,6 +7,9 @@
             templateUrl: '/Researcher/GetEmptyFormForResearcher/?formId=' + formId,
             controller: 'researcherEmptyFormPageModal',
             size: "newFormModal",
+            resolve: {
+                isGotoAfter: true
+            }
         });
     };
 
