@@ -43,12 +43,14 @@ namespace ResearcherForms.BusinessLogic {
 					required = field.Required,
 					description = field.Description,
 					position = field.PositionOnForm,
+					dataValue = "",
 					options = field.Options == null || field.Options.Count == 0
 						? null
 						: field.Options.Select( option => new {
 							id = option.Id,
 							name = option.Name,
-							value = option.Value
+							value = option.Value,
+							isSelected = false
 						} )
 				} )
 			};
@@ -127,7 +129,11 @@ namespace ResearcherForms.BusinessLogic {
 		private string GetStringDataFromObject( string fieldType, object value ) {
 			switch( fieldType ) {
 				case "date": return ( value as string );
-				case "checkbox": return value == null ? "false" : ( (bool)value ).ToString();
+				case "checkbox": return string.IsNullOrEmpty(
+					value.ToString()
+					) 
+					? "false" 
+					: ( (bool)value ).ToString();
 				case "checkbox-group": return null;
 				case "radio-group": return ( (long)value ).ToString();
 				case "rich-text": return ( value as string );

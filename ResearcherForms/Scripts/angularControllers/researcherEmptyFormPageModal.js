@@ -5,11 +5,20 @@
             $('#datetimepicker1').datetimepicker();
     }
 
-    //$uibModalInstance.opened.then(function () {
-    //    $('#datetimepicker1').datetimepicker();
-    //});
 
     $scope.ok = function () {
+
+        for (var i = 0; i < $scope.formModel.fields.length; i += 1) {
+            if ($scope.formModel.fields[i]['required'] === true
+                && (!$scope.formModel.fields[i]['dataValue']
+                    || $scope.formModel.fields[i]['dataValue'] == '')
+                && $scope.formModel.fields[i]['fieldType'] != 'checkbox-group'
+                && $scope.formModel.fields[i]['fieldType'] != 'checkbox'
+                ) {
+                $scope.alertsFormModal[0] = { type: 'danger', msg: 'Please fill all mandatory fields!' };
+                return;
+            }
+        }
 
         formFieldsData = [];
         for (var i = 0; i < $scope.formModel.fields.length; i += 1) {
@@ -53,9 +62,7 @@
             for (var i = 0; i < field.options.length; i += 1) {
                 var option = {
                     optionId: field.options[i].id,
-                    value: field.options[i].isSelected || field.options[i].isSelected == false
-                        ? false
-                        : true
+                    value: field.options[i].isSelected
                 };
                 options.push(option)
             }
