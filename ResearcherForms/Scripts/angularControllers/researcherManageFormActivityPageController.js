@@ -17,7 +17,7 @@
             controller: 'researcherEmptyFormPageModal',
             size: "newFormModal",
             resolve: {
-                isGotoAfter:false
+                isGotoAfter: false
             }
         });
 
@@ -29,6 +29,22 @@
             //$window.alert(response.statusText);
         });
     };
+
+    $scope.showAnalyticFormModal = function (formId) {
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: '/Researcher/GetResearcherAnalytic/?formId=' + formId,
+            controller: 'researcherEmptyFormPageModal'
+            //size: "newFormModal"
+        });
+
+        modalInstance.result.then(function () {
+            modalInstance.close();
+        }, function (response) {
+            //$window.alert(response.statusText);
+        });
+    };
+
 
     $scope.goBackToFormsInCourse = function (courseId) {
         $window.location.href = $scope.basicUrl + '/Researcher/GetCourseForms/?courseId=' + courseId;
@@ -96,7 +112,7 @@
     $scope.getIndexOfArrayByProperty = function findWithAttr(array, attr, value, isOption) {
         for (var i = 0; i < array.length; i += 1) {
             if (isOption) {
-                if (array[i][attr] === value && array[i]['isOption']==true) {
+                if (array[i][attr] === value && array[i]['isOption'] == true) {
                     return i;
                 }
             }

@@ -54,5 +54,10 @@ namespace ResearcherForms.Controllers {
 			}
 		}
 
+		public ActionResult GetResearcherAnalytic( long formId ) {
+			ViewBag.FormModel = _researcherManager.GetFormAnalyticByJSON( formId );
+			return PartialView( "~/Views/Researcher/_ResearcherFormAnalyticModal.cshtml");
+		}
+
 	}
 }
