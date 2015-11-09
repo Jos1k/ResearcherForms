@@ -201,8 +201,8 @@ namespace ResearcherForms.BusinessLogic {
 
 			fieldIdInCorrectOrder.ForEach( fieldInForm => {
 				if( !fieldInForm.Item3 ) {
-					FieldData fieldData = _dbContext
-					.FieldsData
+					FieldData fieldData = formFieldData
+					.Options
 					.FirstOrDefault( field =>
 						field.IsOption == fieldInForm.Item2
 						&& field.FormFieldId == fieldInForm.Item1
@@ -213,15 +213,17 @@ namespace ResearcherForms.BusinessLogic {
 						fieldId = fieldInForm.Item1
 					} );
 				} else {
-					FieldData selectedOption = _dbContext
-						.FieldsData
+					FieldData selectedOption = formFieldData
+						.Options
 						.FirstOrDefault( field =>
 							!field.IsOption
 							&& field.FormFieldId == fieldInForm.Item1
 						);
 					if( selectedOption != null ) {
+						long selectedOptionId;
+						bool isNotEmpty = long.TryParse( selectedOption.Value, out selectedOptionId );
 						fields.Add( new {
-							value = _dbContext.Options.Find( long.Parse( selectedOption.Value ) ).Name,
+							value = isNotEmpty ? _dbContext.Options.Find( selectedOptionId ).Name:null,
 							fieldId = fieldInForm.Item1
 						} );
 					} else {
