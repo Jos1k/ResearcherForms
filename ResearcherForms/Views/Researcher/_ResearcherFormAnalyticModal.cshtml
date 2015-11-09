@@ -1,0 +1,51 @@
+﻿@model List<ResearcherForms.Models.FormAnalyticFormModalHeader>
+<div class="modal-content" style="border-radius: 0; border:none;">
+    <div class="modal-header" style="background-color: #34495E; color: white;">
+        <h5 class="modal-title"><b>Form Analytic</b></h5>
+    </div>
+    <div class="modal-body">
+        <div class="container">
+            <div class="table-responsive" style="overflow-y: scroll; overflow-x:scroll;">
+                <table class="table content-loader" border="2px">
+                    <thead>
+                        <tr>
+                            <th style="min-width:150px;" rowspan="2">Date</th>
+                            @for( int i = 0; i < Model.Count(); i++ ) {
+                                if( Model[i].Options == null ) {
+                                    <th rowspan="2" style="min-width:150px;">@Model[i].FieldName</th>
+                                } else {
+                                    <th colspan="@Model[i].Options.Count.ToString()" style="min-width:150px;">@Model[i].FieldName</th>
+                                }
+                            }
+                        </tr>
+                        <tr>
+                            @for( int i = 0; i < Model.Count(); i++ ) {
+                                if( Model[i].Options != null && Model[i].Options.Count > 0 ) {
+                                    for( int j = 0; j < Model[i].Options.Count(); j++ ) {
+                                        <th>@Model[i].Options[j]</th>
+                                    }
+                                }
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="fieldRow in fields">
+                            <td style="border:2px solid">{{getDateInString(fieldRow.formFieldDate)}}</td>
+                            <td style="border:2px solid" ng-repeat="fieldCol in fieldRow.fields">
+                                {{fieldCol.value}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" ng-click="cancel()">
+            Cancel
+        </button>
+        <button type="button" class="btn btn-success" ng-click="ok()">
+            OK
+        </button>
+    </div>
+</div>

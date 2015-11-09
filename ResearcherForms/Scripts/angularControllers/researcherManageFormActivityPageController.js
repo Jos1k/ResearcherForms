@@ -31,18 +31,36 @@
     };
 
     $scope.showAnalyticFormModal = function (formId) {
-        var modalInstance = $uibModal.open({
-            animation: true,
-            templateUrl: '/Researcher/GetResearcherAnalytic/?formId=' + formId,
-            controller: 'researcherEmptyFormPageModal'
-            //size: "newFormModal"
-        });
 
-        modalInstance.result.then(function () {
-            modalInstance.close();
-        }, function (response) {
-            //$window.alert(response.statusText);
-        });
+        $http({
+            method: 'POST',
+            url: '/Researcher/GetResearcherAnalytic',
+            headers: { 'Content-Type': 'application/json;' },
+            data: {
+                'formId': formId
+            }
+        })
+        .then(function (response) {
+            var fieldDataValues = JSON.parse(response.data);
+
+            var modalInstance = $uibModal.open({
+                animation: true,
+                template: $scope.formAnalyticTemplate,
+                controller: "researcherAnalyticFormPageModal",
+                size: 'analyticModal',
+                resolve: {
+                    formFields: function () {
+                        return fieldDataValues;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function () {
+                modalInstance.close();
+            }, function (response) {
+                //$window.alert(response.statusText);
+            });
+        }, function (response) { });
     };
 
 

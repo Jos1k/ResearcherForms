@@ -145,12 +145,86 @@ namespace ResearcherForms.BusinessLogic {
 					? "false"
 					: ( (bool)value ).ToString();
 				case "checkbox-group": return null;
-				case "radio-group": return (value is long) ? ( (long) value ).ToString() : "";
+				case "radio-group": return ( value is long ) ? ( (long)value ).ToString() : "";
 				case "rich-text": return ( value as string );
 				case "select": return ( value as string );
 				case "text": return ( value as string );
 				default: return value.ToString();
 			}
+		}
+
+		public List<FormAnalyticFormModalHeader> GetFormAnalyticHeaderByJSON( long formId ) {
+			List<FormAnalyticFormModalHeader> headers = new List<FormAnalyticFormModalHeader>();
+
+			ResearchForm form = _dbContext.ResearchForms.Find( formId );
+			headers.AddRange(
+				form
+				.Fields
+				.OrderBy( field => field.PositionOnForm ).Select(
+					field => new FormAnalyticFormModalHeader {
+						FieldName = field.Label,
+						Options = field.Options == null || field.Options.Count == 0
+							? null
+							: field.Options.Select( option => option.Name ).ToList()
+					}
+				).ToList()
+			);
+			return headers;
+		}
+
+		private List<dynamic> GetFieldsDataInCorrectOrder( UserFormFieldData formFieldData ) {
+			var formFieldsDataOrder = formFieldData.ResearchForm.Fields.OrderBy( x => x.PositionOnForm ).ToList();
+
+			List<Tuple<long, bool>> fieldIdInCorrectOrder = new List<Tuple<long, bool>>();
+			formFieldsDataOrder.ForEach( field => {
+				if( field.Options == null || field.Options.Count == 0 ) {
+					fieldIdInCorrectOrder.Add( new Tuple<long, bool>( field.Id, false ) );
+				} else {
+					field.Options.ToList().ForEach( option =>
+						fieldIdInCorrectOrder.Add( new Tuple<long, bool>( option.Id, true ) )
+					);
+				}
+			} );
+
+			List<dynamic> fields = new List<dynamic>();
+
+			fieldIdInCorrectOrder.ForEach( fieldInForm => {
+				FieldData fieldData = _dbContext
+						.FieldsData
+						.FirstOrDefault( field =>
+							field.IsOption == fieldInForm.Item2
+							&& field.FormFieldId == fieldInForm.Item1
+						);
+
+				fields.Add( new {
+					value = fieldData == null ? null : fieldData.Value,
+					fieldId = fieldInForm.Item1
+				}
+				);
+			} );
+			return fields;
+		}
+
+		public string GetFormAnalyticByJSON( long formId ) {
+			ResearchForm form = _dbContext.ResearchForms.Find( formId );
+			var shortForm = form.UserFormsFieldData
+					.OrderByDescending( formFIeldData => formFIeldData.ResearchNumber )
+					.Select(
+						formFIeldData => new {
+							formFieldDate = formFIeldData.DateCreating,
+							formFieldId = formFIeldData.Id,
+							formFieldNumber = formFIeldData.ResearchNumber,
+							fields = GetFieldsDataInCorrectOrder( formFIeldData )
+							//fields = formFIeldData.Options.Select( fieldData =>
+							//	new {
+							//		value = fieldData.Value,
+							//		fieldId = fieldData.FormFieldId,
+							//		isOption = fieldData.IsOption
+							//	}
+							//).ToList()
+						}
+					).ToList();
+			return JsonConvert.SerializeObject( shortForm );
 		}
 	}
 }

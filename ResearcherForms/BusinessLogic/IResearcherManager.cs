@@ -8,9 +8,10 @@ namespace ResearcherForms.BusinessLogic {
 	public interface IResearcherManager {
 		string GetCourseByIdByJSON( long courseId );
 		string GetFormModelByJSON( long formId );
-
 		string FillNewForm( string formModel, string userId );
 		string GetFormActivityByJSON( long formId );
 		string GetFormFieldDataByJSON( long formFieldId );
+		string GetFormAnalyticByJSON( long formId );
+		List<FormAnalyticFormModalHeader> GetFormAnalyticHeaderByJSON( long formId );
 	}
 }

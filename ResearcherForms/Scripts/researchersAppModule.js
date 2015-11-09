@@ -11,6 +11,8 @@ researchersAppModule.controller('researcherPageController', researcherPageContro
 researchersAppModule.controller('researcherManageFormsInCoursePageController', researcherManageFormsInCoursePageController);
 researchersAppModule.controller('researcherEmptyFormPageModal', researcherEmptyFormPageModal);
 researchersAppModule.controller('researcherManageFormActivityPageController', researcherManageFormActivityPageController);
+researchersAppModule.controller('researcherAnalyticFormPageModal', researcherAnalyticFormPageModal);
+
 
 var dateTimePicker = function () {
     return {

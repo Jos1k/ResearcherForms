@@ -25,9 +25,9 @@ namespace ResearcherForms.Controllers {
 		}
 
 		public ActionResult GetEmptyFormForResearcher( long formId ) {
-			ViewBag.FormModel = _researcherManager.GetFormModelByJSON(formId);
+			ViewBag.FormModel = _researcherManager.GetFormModelByJSON( formId );
 			ViewBag.BasicUrl = string.Format( "{0}://{1}:{2}", this.Request.Url.Scheme, this.Request.Url.Host, this.Request.Url.Port );
-			return PartialView("~/Views/Researcher/_ResearcherFormModal.cshtml", formId);
+			return PartialView( "~/Views/Researcher/_ResearcherFormModal.cshtml", formId );
 		}
 
 		public ActionResult FillNewForm( string formModel ) {
@@ -39,9 +39,14 @@ namespace ResearcherForms.Controllers {
 			}
 		}
 
-		public ActionResult GetFormHistory(long formId) {
+		public ActionResult GetFormHistory( long formId ) {
 			ViewBag.Form = _researcherManager.GetFormActivityByJSON( formId );
 			ViewBag.BasicUrl = string.Format( "{0}://{1}:{2}", this.Request.Url.Scheme, this.Request.Url.Host, this.Request.Url.Port );
+			ViewBag.FormAnalytic =  StaticHelper.RenderPartialViewToString(
+				this,
+				"_ResearcherFormAnalyticModal", 
+				_researcherManager.GetFormAnalyticHeaderByJSON( formId )
+			);
 			return View( "~/Views/Researcher/ResearcherFormHistory.cshtml" );
 		}
 
@@ -55,8 +60,8 @@ namespace ResearcherForms.Controllers {
 		}
 
 		public ActionResult GetResearcherAnalytic( long formId ) {
-			ViewBag.FormModel = _researcherManager.GetFormAnalyticByJSON( formId );
-			return PartialView( "~/Views/Researcher/_ResearcherFormAnalyticModal.cshtml");
+			var formFieldData =  _researcherManager.GetFormAnalyticByJSON( formId );
+			return Json( formFieldData );
 		}
 
 	}

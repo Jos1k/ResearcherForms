@@ -230,6 +230,7 @@
     <Compile Include="Models\CourseModel.cs" />
     <Compile Include="Models\FieldDataModel.cs" />
     <Compile Include="Models\FieldModel.cs" />
+    <Compile Include="Models\FormAnalyticFormModalHeader.cs" />
     <Compile Include="Models\FormsXMLModels\FormFieldJSONModel.cs" />
     <Compile Include="Models\FormsXMLModels\FormModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -306,6 +307,7 @@
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\angularControllers\adminAddExisitingUsersPageModalController.js" />
+    <Content Include="Scripts\angularControllers\researcherAnalyticFormPageModal.js" />
     <Content Include="Scripts\angularControllers\researcherEmptyFormPageModal.js" />
     <Content Include="Scripts\angularControllers\adminAddNewUserPageModalController.js" />
     <Content Include="Scripts\angularControllers\researcherManageFormActivityPageController.js" />
@@ -1136,6 +1138,7 @@
     <Content Include="Views\Researcher\ResearcherCourseForms.cshtml" />
     <Content Include="Views\Researcher\_ResearcherFormModal.cshtml" />
     <Content Include="Views\Researcher\ResearcherFormHistory.cshtml" />
+    <Content Include="Views\Researcher\_ResearcherFormAnalyticModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
