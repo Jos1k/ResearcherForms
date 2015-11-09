@@ -163,9 +163,10 @@ namespace ResearcherForms.BusinessLogic {
 				.OrderBy( field => field.PositionOnForm ).Select(
 					field => new FormAnalyticFormModalHeader {
 						FieldName = field.Label,
-						Options = field.Options == null || field.Options.Count == 0
-							? null
-							: field.Options.Select( option => option.Name ).ToList()
+						Options = field.FieldType == StaticHelper.ControlTypes["checkbox-group"]
+						&& ( field.Options != null && field.Options.Count > 0 )
+							? field.Options.Select( option => option.Name ).ToList()
+							: null
 					}
 				).ToList()
 			);
@@ -175,13 +176,23 @@ namespace ResearcherForms.BusinessLogic {
 		private List<dynamic> GetFieldsDataInCorrectOrder( UserFormFieldData formFieldData ) {
 			var formFieldsDataOrder = formFieldData.ResearchForm.Fields.OrderBy( x => x.PositionOnForm ).ToList();
 
-			List<Tuple<long, bool>> fieldIdInCorrectOrder = new List<Tuple<long, bool>>();
+			List<Tuple<long, bool, bool>> fieldIdInCorrectOrder = new List<Tuple<long, bool, bool>>();
 			formFieldsDataOrder.ForEach( field => {
 				if( field.Options == null || field.Options.Count == 0 ) {
-					fieldIdInCorrectOrder.Add( new Tuple<long, bool>( field.Id, false ) );
-				} else {
+					fieldIdInCorrectOrder.Add( new Tuple<long, bool, bool>( field.Id, false, false ) );
+				} 
+				if(
+					  field.FieldType != StaticHelper.ControlTypes["checkbox-group"]
+					  && ( field.Options != null && field.Options.Count > 0 )
+				  ) {
+					fieldIdInCorrectOrder.Add( new Tuple<long, bool, bool>( field.Id, false, true ) );
+				} 
+				if(
+					  field.FieldType == StaticHelper.ControlTypes["checkbox-group"]
+					  && ( field.Options != null && field.Options.Count > 0 )
+				  ) {
 					field.Options.ToList().ForEach( option =>
-						fieldIdInCorrectOrder.Add( new Tuple<long, bool>( option.Id, true ) )
+						fieldIdInCorrectOrder.Add( new Tuple<long, bool, bool>( option.Id, true, false ) )
 					);
 				}
 			} );
@@ -189,18 +200,37 @@ namespace ResearcherForms.BusinessLogic {
 			List<dynamic> fields = new List<dynamic>();
 
 			fieldIdInCorrectOrder.ForEach( fieldInForm => {
-				FieldData fieldData = _dbContext
+				if( !fieldInForm.Item3 ) {
+					FieldData fieldData = _dbContext
+					.FieldsData
+					.FirstOrDefault( field =>
+						field.IsOption == fieldInForm.Item2
+						&& field.FormFieldId == fieldInForm.Item1
+					);
+
+					fields.Add( new {
+						value = fieldData == null ? null : fieldData.Value,
+						fieldId = fieldInForm.Item1
+					} );
+				} else {
+					FieldData selectedOption = _dbContext
 						.FieldsData
 						.FirstOrDefault( field =>
-							field.IsOption == fieldInForm.Item2
+							!field.IsOption
 							&& field.FormFieldId == fieldInForm.Item1
 						);
-
-				fields.Add( new {
-					value = fieldData == null ? null : fieldData.Value,
-					fieldId = fieldInForm.Item1
+					if( selectedOption != null ) {
+						fields.Add( new {
+							value = _dbContext.Options.Find( long.Parse( selectedOption.Value ) ).Name,
+							fieldId = fieldInForm.Item1
+						} );
+					} else {
+						fields.Add( new {
+							value = "",
+							fieldId = fieldInForm.Item1
+						} );
+					}
 				}
-				);
 			} );
 			return fields;
 		}
