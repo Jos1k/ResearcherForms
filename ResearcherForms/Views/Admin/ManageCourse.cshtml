@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Manage Course";
+    ViewBag.Title = "Редактор груп";
 }
 <div class="row" id="manageCourse" ng-controller="adminManageCoursePageController" ng-cloak>
     <div ng-init="course = @ViewBag.Course" />
@@ -14,19 +14,19 @@
         @Html.Partial( "~/Views/Admin/_AddNewFormModal.cshtml" );
     </div>
 
-    <h3>Course: {{course.name}}<button class="btn btn-primary" ng-click="showChangeCourseNameModal()">...</button></h3>
+    <h3>Група досліджень: {{course.name}}<button class="btn btn-primary" ng-click="showChangeCourseNameModal()">...</button></h3>
     <div class="panel panel-default">
-        <div class="panel-heading">Researchers in this course</div>
+        <div class="panel-heading">Дослідники</div>
         <div class="panel-body">
-            <button class="btn btn-success" ng-click="showAddExisitingUserModal()">Add existing</button>
-            <button class="btn btn-primary" ng-click="showAddNewUserModal()">Create new</button>
-            <button class="btn btn-danger" ng-click="showRemoveExisitingUserModal()" ng-disabled="selectedUsers(false).length==0">Remove from course</button>
+            <button class="btn btn-success" ng-click="showAddExisitingUserModal()">Додати</button>
+            <button class="btn btn-primary" ng-click="showAddNewUserModal()">Зареєструвати</button>
+            <button class="btn btn-danger" ng-click="showRemoveExisitingUserModal()" ng-disabled="selectedUsers(false).length==0">Видалити</button>
         </div>
         <table class="table">
             <thead>
                 <tr>
                     <th class="col-md-1"></th>
-                    <th class="col-md-11">Name</th>
+                    <th class="col-md-11">Ім\'я дослідника</th>
                 </tr>
             </thead>
             <tbody>
@@ -42,17 +42,17 @@
         </table>
     </div>
     <div class="panel panel-default">
-        <div class="panel-heading">Forms in this course</div>
+        <div class="panel-heading">Форми</div>
         <div class="panel-body">
-            <button class="btn btn-success" ng-click="showAddNewFormModal(true,null)">Add new</button>
-            <button class="btn btn-danger" ng-click="showRemoveFormsModal()" ng-disabled="selectedForms(false).length==0">Remove</button>
+            <button class="btn btn-success" ng-click="showAddNewFormModal(true,null)">Додати нову</button>
+            <button class="btn btn-danger" ng-click="showRemoveFormsModal()" ng-disabled="selectedForms(false).length==0">Видалити</button>
         </div>
         <table class="table">
             <thead>
                 <tr>
                     <th class="col-md-1"></th>
-                    <th class="col-md-1">Actions</th>
-                    <th class="col-md-10">Name</th>
+                    <th class="col-md-1">Дії</th>
+                    <th class="col-md-10">Назва</th>
                 </tr>
             </thead>
             <tbody>

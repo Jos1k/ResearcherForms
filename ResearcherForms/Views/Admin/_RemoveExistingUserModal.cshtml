@@ -1,7 +1,7 @@
 ﻿@model long
 <div class="modal-content" style="border-radius: 0; border:none;">
     <div class="modal-header" style="background-color: #34495E; color: white;">
-        <h5 class="modal-title"><b>Remove researchers from course</b></h5>
+        <h5 class="modal-title"><b>Видаленння дослідника з групи</b></h5>
     </div>
     <div class="modal-body">
         <div ng-init="courseId = @Model" />
@@ -9,14 +9,14 @@
             <div class="panel panel-default">
                 <div class="panel-heading"></div>
                 <div class="panel-body">
-                   <h4>Do you really want to delete {{researchers.length}} researcher(s) from course?</h4>
+                   <h4>Ви справді хочете видалити {{researchers.length}} дослідника(ів) з групи?</h4>
                 </div>
             </div>
         </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-danger" ng-click="cancel()">
-            Cancel
+            Відміна
         </button>
         <button type="button" class="btn btn-success" ng-click="ok()">
             OK

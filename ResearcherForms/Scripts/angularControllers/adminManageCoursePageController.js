@@ -204,14 +204,14 @@
                 $('#main_content').html('<form id="" action=""><textarea name="formBuilder" id="formBuilder" cols="30" rows="10"></textarea></form><br style="clear:both">');
                 $("#formBuilder").val(response.data);
                 $("#formBuilder").formBuilder();
-                $('.modal-title').text("Edit Form")
+                $('.modal-title').text("Редагування форми")
                 $('#myModal').modal('show');
             }, function (response) {
                 return;
             });
         }
         else {
-            $('.modal-title').text("Create New Form")
+            $('.modal-title').text("Створити нову форму")
             $('#myModal').modal('show');
         }
     };

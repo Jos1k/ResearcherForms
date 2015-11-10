@@ -2,15 +2,15 @@
     <div class="modal-content" style="border-radius: 0; border:none;">
         <div class="modal-header" style="background-color: #34495E; color: white;">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Create New Form</h4>
+            <h4 class="modal-title">Створити нову форму</h4>
         </div>
         <div class="modal-body">
             <uib-alert ng-repeat="alert in alertsNewForm" type="{{alert.type}}">{{alert.msg}}</uib-alert>
             <div class="container">
                 <div class="row">
-                    <label for="formName" class="col-md-3 control-label">Form Name:</label>
+                    <label for="formName" class="col-md-3 control-label">Назва Форми:</label>
                     <div class="col-md-9">
-                        <input type="text" id="formName" class="form-control" placeholder="Form Name" ng-model="formName">
+                        <input type="text" id="formName" class="form-control" placeholder="Назва" ng-model="formName">
                     </div>
                 </div>
                 <div class="form-group">
@@ -26,7 +26,7 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-danger" ng-click="hideModal()">Cancel</button>
+            <button type="button" class="btn btn-danger" ng-click="hideModal()">Відміна</button>
             <button type="button" class="btn btn-success" ng-disabled="validationOnNewFormModalIsDisabled()" ng-click="addNewForm()">OK</button>
         </div>
     </div>

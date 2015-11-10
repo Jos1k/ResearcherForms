@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Admin Panel";
+    ViewBag.Title = "Адмін Панель";
 }
 
 <div class="row" ng-controller="adminPageController" ng-cloak>
@@ -9,15 +9,15 @@
     <div ng-init="removeCourseModalTemplate = '@ViewBag.RemoveCourseModalTemplate'" />
     
 
-    <h3>Courses:</h3>
+    <h3>Групи досліджень:</h3>
     <div class="row">
         <div class="col-md-6">
-            <input ng-model="search.Name" id="search-course" class="form-control" type="text" placeholder="Type course name to search">
+            <input ng-model="search.Name" id="search-course" class="form-control" type="text" placeholder="Пошук по групам досліджень">
         </div>
         <div class="col-md-4"></div>
         <div class="col-md-2 text-right">
             <button type="button" class="btn btn-success" ng-click="showCreateCourseModal()">
-                Add New Course
+                Додати нову групу
             </button>
         </div>
     </div>
@@ -25,10 +25,10 @@
     <table class="table table-hover">
         <thead>
             <tr>
-                <th class="col-md-1">Name</th>
-                <th class="col-md-2" style="text-align:center">Forms Count</th>
-                <th class="col-md-2" style="text-align:center">Researchers Count</th>
-                <th class="col-md-1" style="text-align:center">Actions</th>
+                <th class="col-md-1">Назва</th>
+                <th class="col-md-2" style="text-align:center">Кількість Форм</th>
+                <th class="col-md-2" style="text-align:center">Кількість Досліджень</th>
+                <th class="col-md-1" style="text-align:center">Дії</th>
             </tr>
         </thead>
         <tbody>

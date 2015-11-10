@@ -145,7 +145,6 @@ E:\Development\ResearcherFormsGit\ResearcherForms\bin\Ninject.Web.Mvc.xml
 E:\Development\ResearcherFormsGit\ResearcherForms\bin\YAXLib.dll
 E:\Development\ResearcherFormsGit\ResearcherForms\bin\YAXLib.pdb
 E:\Development\ResearcherFormsGit\ResearcherForms\bin\YAXLib.xml
-E:\Development\ResearcherFormsGit\ResearcherForms\obj\Debug\ResearcherForms.csprojResolveAssemblyReference.cache
 D:\Freelance\ResearchForms\ResearcherForms\bin\ApplicationInsights.config
 D:\Freelance\ResearchForms\ResearcherForms\bin\ResearcherForms.dll.config
 D:\Freelance\ResearchForms\ResearcherForms\bin\ResearcherForms.dll

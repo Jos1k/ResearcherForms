@@ -1,7 +1,7 @@
 ﻿@model long
 <div class="modal-content" style="border-radius: 0; border:none;">
     <div class="modal-header" style="background-color: #34495E; color: white;">
-        <h5 class="modal-title"><b>Change course name</b></h5>
+        <h5 class="modal-title"><b>Змінити назву групи</b></h5>
     </div>
     <div class="modal-body">
         <div ng-init="courseId = @Model" />
@@ -11,7 +11,7 @@
                 <div class="panel-heading"></div>
                 <div class="panel-body">
                     <div class="form-group">
-                        <label for="courseName">Course name:</label>
+                        <label for="courseName">Назва групи:</label>
                         <input type="text" id="courseName" class="form-control" placeholder="Course name" ng-model="courseName">
                     </div>
                 </div>
@@ -20,7 +20,7 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-danger" ng-click="cancel()">
-            Cancel
+            Відміна
         </button>
         <button type="button" class="btn btn-success" ng-click="ok()" ng-disabled="courseNameCheck()">
             OK

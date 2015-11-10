@@ -1,19 +1,19 @@
 ﻿@model long
 <div class="modal-content" style="border-radius: 0; border:none;">
     <div class="modal-header" style="background-color: #34495E; color: white;">
-        <h5 class="modal-title"><b>Create Course</b></h5>
+        <h5 class="modal-title"><b>Додати дослідника</b></h5>
     </div>
     <div class="modal-body">
         <div ng-init="courseId = @Model" />
         <div class="form-group">
             <div class="panel panel-default">
-                <div class="panel-heading">Add existing user to this course</div>
+                <div class="panel-heading">Виберіть дослідників зі списку</div>
                 <div class="panel-body">
                     <table class="table">
                         <thead>
                             <tr>
                                 <th class="col-md-1"></th>
-                                <th class="col-md-11">Name</th>
+                                <th class="col-md-11">Ім\'я дослідника</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -33,7 +33,7 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-danger" ng-click="cancel()">
-            Cancel
+            Відміна
         </button>
         <button type="button" class="btn btn-success" ng-click="ok()" ng-disabled="isNotSelectedResearchers()">
             OK

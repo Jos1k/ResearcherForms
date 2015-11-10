@@ -1,4 +1,4 @@
-/*
+﻿/*
 formBuilder - git@github.com:kevinchappell/formBuilder.git
 Version: 1.3.5
 Author: Kevin Chappell <kevin.b.chappell@gmail.com>
@@ -38,7 +38,7 @@ Author: Kevin Chappell <kevin.b.chappell@gmail.com>
             showWarning: false,
             serializePrefix: 'frmb',
             messages: {
-                add: 'Add Item',
+                add: 'Додати опцію',
                 allowSelect: 'Allow Select',
                 cannotBeEmpty: 'This field cannot be empty',
                 checkboxGroup: 'Checkbox Group',
@@ -46,7 +46,7 @@ Author: Kevin Chappell <kevin.b.chappell@gmail.com>
                 checkboxes: 'Checkboxes',
                 clearAllMessage: 'Are you sure you want to remove all items?',
                 clearAll: 'Clear All',
-                close: 'Close',
+                close: 'Завершити',
                 copy: 'Copy To Clipboard',
                 dateField: 'Date Field',
                 description: 'Help Text',
@@ -58,9 +58,9 @@ Author: Kevin Chappell <kevin.b.chappell@gmail.com>
                 editXML: 'Edit XML',
                 fieldVars: 'Field Variables',
                 fieldRemoveWarning: 'Are you sure you want to remove this field?',
-                getStarted: 'Drag a field from the right to this area',
+                getStarted: 'Перетягніть елемент форми з правої частини, сюди',
                 hide: 'Edit',
-                label: 'Label',
+                label: 'Назва',
                 labelEmpty: 'Field Label cannot be empty',
                 limitRole: 'Limit access to one or more of the following roles:',
                 mandatory: 'Mandatory',
@@ -80,11 +80,11 @@ Author: Kevin Chappell <kevin.b.chappell@gmail.com>
                 radio: 'Radio',
                 removeMessage: 'Remove Element',
                 remove: '&#215;',
-                required: 'Required',
+                required: 'Обов\'язкове',
                 richText: 'Rich Text Editor',
                 roles: 'Access',
                 save: 'Save Template',
-                selectOptions: 'Select Items',
+                selectOptions: 'Опції',
                 select: 'Select',
                 selectionsMessage: 'Allow Multiple Selections',
                 text: 'Text Field',

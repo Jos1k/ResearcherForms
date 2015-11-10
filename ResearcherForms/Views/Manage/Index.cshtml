@@ -1,19 +1,19 @@
 ﻿@model ResearcherForms.Models.IndexViewModel
 @{
-    ViewBag.Title = "Manage";
+    ViewBag.Title = "Керування обліковим записом";
 }
 
-<h2>@ViewBag.Title.</h2>
+<h2>Керування обліковим записом.</h2>
 
 <p class="text-success">@ViewBag.StatusMessage</p>
 <div>
-    <h4>Change your account settings</h4>
+    <h4>Зміна налаштувань облікового запису</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>Password:</dt>
+        <dt>Пароль:</dt>
         <dd>
             [
-            @Html.ActionLink( "Change your password", "ChangePassword" )
+            @Html.ActionLink( "Змінити пароль", "ChangePassword" )
             ]
         </dd>
     </dl>
