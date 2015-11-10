@@ -225,3 +225,4 @@ D:\Freelance\ResearchForms\ResearcherForms\bin\Microsoft.Owin.Security.Microsoft
 D:\Freelance\ResearchForms\ResearcherForms\obj\Debug\ResearcherForms.dll
 D:\Freelance\ResearchForms\ResearcherForms\obj\Debug\ResearcherForms.pdb
 D:\Freelance\ResearchForms\ResearcherForms\obj\Debug\ResearcherForms.csprojResolveAssemblyReference.cache
+E:\Development\ResearcherFormsGit\ResearcherForms\obj\Debug\ResearcherForms.csprojResolveAssemblyReference.cache

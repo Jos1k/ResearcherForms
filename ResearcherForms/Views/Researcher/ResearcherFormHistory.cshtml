@@ -1,8 +1,8 @@
 ﻿@{
-    ViewBag.Title = "Form History";
+    ViewBag.Title = "Історія досліджень";
 }
 <link rel="stylesheet" type="text/css" href="@Url.Content( "~/Content/bootstrap-datetimepicker.css" )" />
-<script src="@Url.Content( "~/Scripts/Moment.js" )"></script>
+<script src="@Url.Content( "~/Scripts/moment-with-locales.js" )"></script>
 <script src="@Url.Content( "~/Scripts/bootstrap-datetimepicker.min.js" )"></script>
 
 <div class="row" id="manageForm" ng-controller="researcherManageFormActivityPageController" ng-cloak>
@@ -11,17 +11,17 @@
     <div ng-init="formAnalyticTemplate = '@ViewBag.FormAnalytic'" />
     
 
-    <h3>Form: {{form.name}}</h3>
+    <h3>Форма: {{form.name}}</h3>
     <div class="panel panel-default">
         <div class="panel-heading">
             <div class="row">
                 <div class="col-md-6">
-                    Form activity
+                    Історія досліджень
                 </div>
                 <div class="col-md-6" style="text-align:right">
-                    <button class="btn btn-warning" ng-click="goBackToFormsInCourse(form.courseId)"> Back to Forms</button>
-                    <button class="btn btn-primary" ng-click="showResearcherEmptyFormModal(form.id)"> Add new research</button>
-                    <button class="btn btn-success" ng-click="showAnalyticFormModal(form.id)">Show analytic table</button>
+                    <button class="btn btn-warning" ng-click="goBackToFormsInCourse(form.courseId)">Повернутись до форм</button>
+                    <button class="btn btn-primary" ng-click="showResearcherEmptyFormModal(form.id)">Додати дослід</button>
+                    <button class="btn btn-success" ng-click="showAnalyticFormModal(form.id)">Зведена таблиця результатів</button>
                 </div>
             </div>
         </div>
@@ -32,7 +32,7 @@
                         <thead>
                             <tr>
                                 <th class="col-md-1">#</th>
-                                <th class="col-md-10">Date</th>
+                                <th class="col-md-10">Дата досліду</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -54,7 +54,7 @@
                                 <div class="container">
 									<div ng-hide="isFormActivitySelected" style="height:150px; text-align:center">
 										<br><br><br>
-                                        <h5>Click On Activity To View Research Result</h5>
+                                        <h5>Натисніть на досліді для перегляду результатів</h5>
 									</div>
                                     <div ng-repeat="field in form.formModel.fields" ng-show="isFormActivitySelected">
                                         <div ng-switch on="field.fieldType">

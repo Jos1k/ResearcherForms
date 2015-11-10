@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Date Format 1.2.3
  * (c) 2007-2009 Steven Levithan <stevenlevithan.com>
  * MIT license
@@ -109,13 +109,17 @@ dateFormat.masks = {
 
 // Internationalization strings
 dateFormat.i18n = {
-	dayNames: [
-		"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat",
-		"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
+    dayNames: [
+        "Нед","Пон","Вів","Сер","Чет","П\'ят","Суб",
+		//"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat",
+        "Неділя", "Понеділок", "Вівторок", "Середа", "Четвер", "П\'ятниця", "Субота"
+		//"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
 	],
-	monthNames: [
-		"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
-		"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
+    monthNames: [
+        "Січ","Лют","Бер","Кві","Тра","Чер","Лип","Сер","Вер","Жов","Лис","Гру",
+		//"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+        "Січень", "Лютий", "Березень", "Квітень", "Травень", "Червень", "Липень", "Серпень", "Вересень", "Жовтень", "Листопад", "Грудень"
+		//"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
 	]
 };
 

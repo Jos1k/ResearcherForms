@@ -1,29 +1,29 @@
 ﻿@{
-    ViewBag.Title = "Researcher Course";
+    ViewBag.Title = "Група досліджень";
 }
 
 <link rel="stylesheet" type="text/css" href="@Url.Content( "~/Content/bootstrap-datetimepicker.css" )" /> 
-<script src="@Url.Content( "~/Scripts/Moment.js" )"></script>
+<script src="@Url.Content( "~/Scripts/moment-with-locales.js" )"></script>
 <script src="@Url.Content( "~/Scripts/bootstrap-datetimepicker.min.js" )"></script>
 
 <div class="row" id="manageForm" ng-controller="researcherManageFormsInCoursePageController" ng-cloak>
     <div ng-init="course = @ViewBag.Course" />
     <div ng-init="basicUrl = '@ViewBag.BasicUrl'" />
-    <h3>Course: {{course.name}}</h3>
+    <h3>Група досліджень: {{course.name}}</h3>
     <div class="panel panel-default">
-        <div class="panel-heading">Forms in this course</div>
+        <div class="panel-heading">Форми</div>
         <div class="panel-body">
             <div class="row">
                 <div class="col-md-6">
-                    <input ng-model="search.name" id="search-form" class="form-control" type="text" placeholder="Type form name to search">
+                    <input ng-model="search.name" id="search-form" class="form-control" type="text" placeholder="Пошук по назві форми">
                 </div>
                 <div class="col-md-4"></div>
             </div>
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th class="col-md-1" style="text-align:center;">Actions</th>
-                        <th class="col-md-11">Name</th>
+                        <th class="col-md-1" style="text-align:center;">Дії</th>
+                        <th class="col-md-11">Назва</th>
                     </tr>
                 </thead>
                 <tbody>
